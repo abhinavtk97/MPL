@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/team1name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/team1"
+        android:layout_alignStart="@+id/team1"
+        android:layout_marginStart="-18dp"
+        android:layout_marginTop="11dp"
+        android:text="T1"
+        android:textAlignment="viewStart"
+        android:textAppearance="@style/cardHeadTitle" />
+
+    <TextView
+        android:id="@+id/team2name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/team1name"
+        android:layout_alignEnd="@+id/team2"
+        android:layout_marginTop="-2dp"
+        android:layout_marginEnd="-20dp"
+        android:text="T2"
+        android:textAlignment="viewEnd"
+        android:textAppearance="@style/cardHeadTitle" />
+
+
+    <ImageView
+        android:id="@+id/team1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="24dp" />
+
+    <ImageView
+        android:id="@+id/team2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="31dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rel"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+        android:padding="15dp">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:textAppearance="@style/cardItemComment" />
+
+        <TextView
+            android:id="@+id/message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
+            android:textAlignment="viewEnd"
+            android:layout_marginEnd="5dp"
+            android:textAppearance="@style/cardItemComment" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        android:text="vs"
+        android:textSize="25sp"
+        android:textAppearance="@style/cardHeadTitle" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="TextView"
+        android:textAppearance="@style/cardHeadTitle" />
+
+</RelativeLayout>
+
