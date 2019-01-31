@@ -3,7 +3,6 @@ package in.ac.mace.abhinavtk.mpl.pojo;
 import com.ramotion.expandingcollection.ECCardData;
 
 import java.util.List;
-import java.util.Random;
 
 public class CardData implements ECCardData<Comment> {
 
@@ -19,16 +18,26 @@ public class CardData implements ECCardData<Comment> {
     private String time;
     private String team1Goal;
     private String team2Goal;
-    private int personViewsCount;
-    private int personCommentsCount;
-    private int personLikesCount;
     private List<Comment> listItems;
 
     public CardData() {
-        Random rnd = new Random();
-        this.personViewsCount = 50 + rnd.nextInt(950);
-        this.personCommentsCount = 35 + rnd.nextInt(170);
-        this.personLikesCount = 10 + rnd.nextInt(1000);
+
+    }
+
+    public CardData(String team1name, String team2name, Integer headBackgroundResource, Integer mainBackgroundResource, Integer goal1, Integer goal2, Integer personPictureResource, Integer team1PictureResource, Integer team2PictureResource, String time, String team1Goal, String team2Goal, List<Comment> listItems) {
+        this.team1name = team1name;
+        this.team2name = team2name;
+        this.headBackgroundResource = headBackgroundResource;
+        this.mainBackgroundResource = mainBackgroundResource;
+        this.goal1 = goal1;
+        this.goal2 = goal2;
+        this.personPictureResource = personPictureResource;
+        this.team1PictureResource = team1PictureResource;
+        this.team2PictureResource = team2PictureResource;
+        this.time = time;
+        this.team1Goal = team1Goal;
+        this.team2Goal = team2Goal;
+        this.listItems = listItems;
     }
 
     public String getTeam1name() {
@@ -79,29 +88,7 @@ public class CardData implements ECCardData<Comment> {
         this.team2Goal = team2Goal;
     }
 
-    public int getPersonViewsCount() {
-        return personViewsCount;
-    }
 
-    public void setPersonViewsCount(int personViewsCount) {
-        this.personViewsCount = personViewsCount;
-    }
-
-    public int getPersonCommentsCount() {
-        return personCommentsCount;
-    }
-
-    public void setPersonCommentsCount(int personCommentsCount) {
-        this.personCommentsCount = personCommentsCount;
-    }
-
-    public int getPersonLikesCount() {
-        return personLikesCount;
-    }
-
-    public void setPersonLikesCount(int personLikesCount) {
-        this.personLikesCount = personLikesCount;
-    }
 
     @Override
     public List<Comment> getListItems() {

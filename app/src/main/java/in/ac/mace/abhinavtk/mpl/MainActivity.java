@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
     private TextSwitcher placeSwitcher;
     private TextSwitcher clockSwitcher;
     private TextSwitcher descriptionsSwitcher;
-
     private TextView country1TextView;
     private TextView country2TextView;
     private int countryOffset1;

@@ -5,7 +5,7 @@
     android:padding="15dp">
 
     <ImageView
-        android:id="@+id/icon"
+        android:id="@+id/team1logo"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
@@ -17,9 +17,9 @@
         android:id="@+id/firstLine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/icon"
-        android:layout_toStartOf="@id/icon"
-        android:layout_toLeftOf="@id/icon"
+        android:layout_alignTop="@id/team1logo"
+        android:layout_toStartOf="@id/team1logo"
+        android:layout_toLeftOf="@id/team1logo"
         android:textAlignment="viewEnd"
         android:textAppearance="@style/cardItemPersonName" />
 
@@ -31,8 +31,8 @@
         android:layout_alignEnd="@id/firstLine"
         android:layout_below="@id/firstLine"
         android:layout_marginTop="5dp"
-        android:layout_toStartOf="@id/icon"
-        android:layout_toLeftOf="@id/icon"
+        android:layout_toStartOf="@id/team1logo"
+        android:layout_toLeftOf="@id/team1logo"
         android:textAlignment="viewEnd"
         android:textAppearance="@style/cardItemComment" />
 
