@@ -8,7 +8,7 @@ public class Comment {
     private String commentDate;
     private int teamno;
 
-    public Comment(Integer commentPersonPictureRes, String commentPersonName, String commentText, String commentDate,int teamno) {
+    public Comment(Integer commentPersonPictureRes, String commentText, String commentPersonName, String commentDate,int teamno) {
         this.commentPersonPictureRes = commentPersonPictureRes;
         this.commentPersonName = commentPersonName;
         this.commentText = commentText;

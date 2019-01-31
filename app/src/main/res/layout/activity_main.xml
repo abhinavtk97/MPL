@@ -1,35 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ec="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipChildren="false"
-    tools:context="in.ac.mace.abhinavtk.mpl.MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:clipChildren="false">
 
-    <com.ramotion.expandingcollection.ECBackgroundSwitcherView
-        android:id="@+id/ec_bg_switcher_element"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:foreground="@drawable/background_gradient" />
+        android:layout_height="300dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Live Matches Here"/>
+    </RelativeLayout>
 
-    <in.ac.mace.abhinavtk.mpl.view.ItemsCountView
-        android:id="@+id/items_count_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="120dp"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_marginTop="30dp">
+
+        <FrameLayout
+            android:id="@+id/countries"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/frameLayout">
+
+            <TextView
+                android:id="@+id/tv_country_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_country_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="85dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/temperature_background"
+            android:layout_centerVertical="true"
+            android:id="@+id/frameLayout">
+
+            <TextSwitcher
+                android:id="@+id/ts_temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
+
+        </FrameLayout>
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginStart="@dimen/recycler_view_left_offset"
         android:clipChildren="false"
-        android:orientation="horizontal" />
+        android:overScrollMode="never"
+        app:layoutManager="com.ramotion.cardslider.CardSliderLayoutManager"
+        app:viewUpdater="in.ac.mace.abhinavtk.mpl.cards.CardsUpdater"/>
 
-    <com.ramotion.expandingcollection.ECPagerView
-        android:id="@+id/ec_pager_element"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
-        ec:cardHeaderHeightExpanded="200dp"
-        ec:cardHeight="400dp"
-        ec:cardWidth="300dp" />
-
-</RelativeLayout>
-
+</LinearLayout>

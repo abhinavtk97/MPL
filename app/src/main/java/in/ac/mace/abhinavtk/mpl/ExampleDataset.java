@@ -59,18 +59,18 @@ public class ExampleDataset {
         Random random = new Random();
         List<Comment> comments = new ArrayList<>();
         comments.addAll(Arrays.asList(
-                new Comment(R.drawable.dink, "Aaron Bradley", "When the sensor experiments for deep space, all mermaids accelerate mysterious, vital moons.", "jan 12, 2014",0),
-                new Comment(R.drawable.manav, "Barry Allen", "It is a cold powerdrain, sir.", "jun 1, 2015",1),
-                new Comment(R.drawable.che, "Bella Holmes", "Particle of a calm shield, control the alignment!", "sep 21, 1937",0),
-                new Comment(R.drawable.che, "Caroline Shaw", "The human kahless quickly promises the phenomenan.", "may 23, 1967",0),
-                new Comment(R.drawable.che, "Connor Graham", "Ionic cannon at the infinity room was the sensor of voyage, imitated to a dead pathway.", "sep 1, 1972",0),
-                new Comment(R.drawable.manav, "Deann Hunt", "Vital particles, to the port.", "aug 13, 1995",1),
-                new Comment(R.drawable.che, "Ella Cole", "Stars fly with hypnosis at the boldly infinity room!", "nov 18, 1952",0),
-                new Comment(R.drawable.manav, "Jayden Shaw", "Hypnosis, definition, and powerdrain.", "apr 1, 2013",1),
-                new Comment(R.drawable.che, "Jerry Carrol", "When the queen experiments for nowhere, all particles control reliable, cold captains.", "nov 14, 1964",0),
-                new Comment(R.drawable.manav, "Lena Lukas", "When the c-beam experiments for astral city, all cosmonauts acquire remarkable, virtual lieutenant commanders.", "may 4, 1965",1),
-                new Comment(R.drawable.che, "Leonard Kim", "Starships walk with love at the cold parallel universe!", "jul 3, 1974",0),
-                new Comment(R.drawable.manav, "Mark Baker", "Friendship at the bridge that is when quirky green people yell.", "dec 24, 1989",1)));
+                new Comment(R.drawable.dink, "Club De Dinakan", "Goal", "1:04",0),
+                new Comment(R.drawable.manav, "Real Manavalan", "Goal", "1:05",1),
+                new Comment(R.drawable.dink, "Club De Dinakan", "Goal", "1:08",0),
+                new Comment(R.drawable.dink, "Club De Dinakan", "Goal", "1:04",0),
+                new Comment(R.drawable.dink, "Club De Dinakan", "Red", "1:04",0),
+                new Comment(R.drawable.manav, "Real Manavalan", "Yellow", "1:04",1),
+                new Comment(R.drawable.dink, "Club De Dinakan", "Red", "1:04",0),
+                new Comment(R.drawable.manav, "Real Manavalan", "Goal", "1:04",1),
+                new Comment(R.drawable.dink, "Club De Dinakan", "Goal", "1:04",0),
+                new Comment(R.drawable.manav, "Real Manavalan", "Goal", "1:04",1),
+                new Comment(R.drawable.dink, "Club De Dinakan", "Red", "1:04",0),
+                new Comment(R.drawable.manav, "Real Manavalan", "Goal", "1:04",1)));
         return comments;
     }
 }
