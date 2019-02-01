@@ -2,6 +2,7 @@ package in.ac.mace.abhinavtk.mpl;
 
 import android.app.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,16 +11,17 @@ import android.util.Log;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 
-import in.ac.mace.abhinavtk.mpl.firebase.MatchRepository;
+import java.io.Serializable;
+
 import in.ac.mace.abhinavtk.mpl.pojo.Match;
 
-public class MatchHistory extends Activity {
+public class MatchHistory extends Activity implements MatchAdapter.OnItemClickListener {
 
-    private MatchRepository matchRepository;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference matchreference = db.collection("Matches");
     private MatchAdapter adapter;
@@ -29,7 +31,6 @@ public class MatchHistory extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_match_history);
-        matchRepository = new MatchRepository(FirebaseFirestore.getInstance());
         setUpRecyclerView();
 
     }
@@ -45,7 +46,10 @@ public class MatchHistory extends Activity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         Log.d("firebase","setup");
+        adapter.setOnItemClickListener(this);
     }
+
+
     @Override
     protected void onStart(){
         super.onStart();
@@ -60,4 +64,11 @@ public class MatchHistory extends Activity {
         Log.d("firebase","stop listen");
     }
 
+    @Override
+    public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+        Intent intent = new Intent(MatchHistory.this,MatchDetails.class);
+        intent.putExtra("snapshot",documentSnapshot.getId());
+        startActivity(intent);
+
+    }
 }

@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".MatchHistory" />
-        <activity android:name=".MatchDetails"></activity>
+        <activity android:name=".MatchDetails" />
+        <activity android:name=".Statistics"></activity>
     </application>
 
 </manifest>
