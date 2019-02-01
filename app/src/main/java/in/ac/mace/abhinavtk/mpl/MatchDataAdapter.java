@@ -43,7 +43,7 @@ public class MatchDataAdapter extends FirestoreRecyclerAdapter<MatchData,MatchDa
                 case "Ponjikkara": t2=R.drawable.ponji; break;
                 case "FC Marakkar":t2=R.drawable.mara; break;
             }
-
+            Log.d("verybad","iamhere");
             holder.team1logodata.setImageResource(t1);
             holder.team2logodata.setImageResource(t2);
             holder.description.setText("");

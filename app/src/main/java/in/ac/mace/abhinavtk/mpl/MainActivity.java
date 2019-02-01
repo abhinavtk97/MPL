@@ -244,9 +244,13 @@ public class MainActivity extends AppCompatActivity {
             }
 
             final int clickedPosition = recyclerView.getChildAdapterPosition(view);
+            Intent intent = null;
             if (clickedPosition == activeCardPosition) {
                 if(clickedPosition == 0) {
-                    final Intent intent = new Intent(MainActivity.this, MatchHistory.class);
+                    intent = new Intent(MainActivity.this, MatchHistory.class);
+                    startActivity(intent);
+                }else if(clickedPosition == 1){
+                    intent = new Intent(MainActivity.this, Statistics.class);
                     startActivity(intent);
                 }
 

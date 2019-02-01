@@ -4,14 +4,16 @@ public class StatisticData {
 
     private String name;
     private int number;
+    private String team;
 
     public StatisticData(){
         //empty
     }
 
-    public StatisticData(String name, int number) {
+    public StatisticData(String name, int number,String team) {
         this.name = name;
         this.number = number;
+        this.team=team;
     }
 
 
@@ -29,5 +31,14 @@ public class StatisticData {
 
     public void setNumber(int number) {
         this.number = number;
+    }
+
+
+    public String getTeam() {
+        return team;
+    }
+
+    public void setTeam(String team) {
+        this.team = team;
     }
 }
