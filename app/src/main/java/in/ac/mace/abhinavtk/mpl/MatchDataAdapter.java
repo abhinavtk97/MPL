@@ -35,6 +35,9 @@ public class MatchDataAdapter extends FirestoreRecyclerAdapter<MatchData,MatchDa
                 case "Real Manavalan FC":t1=R.drawable.manav; break;
                 case "Ponjikkara": t1=R.drawable.ponji; break;
                 case "FC Marakkar":t1=R.drawable.mara; break;
+                case "Chekuthans FC":t1=R.drawable.che;break;
+                case "Dashamoolam FC":t1=R.drawable.dasha;break;
+                case "Karakkambi FC":t1=R.drawable.kara;break;
             }
             switch (model.getTeam2()){
                 case "Club De Dinkan":t2=R.drawable.dink; break;
@@ -42,6 +45,10 @@ public class MatchDataAdapter extends FirestoreRecyclerAdapter<MatchData,MatchDa
                 case "Real Manavalan FC":t2=R.drawable.manav; break;
                 case "Ponjikkara": t2=R.drawable.ponji; break;
                 case "FC Marakkar":t2=R.drawable.mara; break;
+                case "Chekuthans FC":t1=R.drawable.che;break;
+                case "Dashamoolam FC":t1=R.drawable.dasha;break;
+                case "Karakkambi FC":t1=R.drawable.kara;break;
+
             }
             Log.d("verybad","iamhere");
             holder.team1logodata.setImageResource(t1);

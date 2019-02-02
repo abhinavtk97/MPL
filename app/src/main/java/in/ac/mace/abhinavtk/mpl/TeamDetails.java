@@ -2,6 +2,7 @@ package in.ac.mace.abhinavtk.mpl;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -40,6 +41,19 @@ public class TeamDetails extends AppCompatActivity {
         String team = getIntent().getStringExtra("team");
         TextView teamname = findViewById(R.id.teamnamerole);
         teamname.setText(team);
+        ImageView imageView = findViewById(R.id.teamimg);
+        int t1=0;
+        switch (team){
+            case "Club De Dinkan":t1=R.drawable.dink; break;
+            case "Bellaries FC" : t1=R.drawable.bell; break;
+            case "Real Manavalan FC":t1=R.drawable.manav; break;
+            case "Ponjikkara FC": t1=R.drawable.ponji; break;
+            case "FC Marakkar":t1=R.drawable.mara; break;
+            case "Chekuthans FC":t1=R.drawable.che;break;
+            case "Dashamoolam FC":t1=R.drawable.dasha;break;
+            case "Karakkambi FC":t1=R.drawable.kara;break;
+        }
+        imageView.setImageResource(t1);
         TextView role1 = findViewById(R.id.role1);
         TextView role2 = findViewById(R.id.role2);
         TextView role3 = findViewById(R.id.role3);

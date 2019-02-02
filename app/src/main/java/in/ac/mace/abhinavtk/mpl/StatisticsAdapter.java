@@ -49,6 +49,9 @@ public class StatisticsAdapter extends ArrayAdapter<StatisticData> {
             case "Real Manavalan FC":t1=R.drawable.manav; break;
             case "Ponjikkara": t1=R.drawable.ponji; break;
             case "FC Marakkar":t1=R.drawable.mara; break;
+            case "Chekuthans FC":t1=R.drawable.che;break;
+            case "Dashamoolam FC":t1=R.drawable.dasha;break;
+            case "Karakkambi FC":t1=R.drawable.kara;break;
         }
         rank.setText(String.valueOf(position+1));
         icon.setImageResource(t1);

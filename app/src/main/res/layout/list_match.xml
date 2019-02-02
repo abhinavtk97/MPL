@@ -7,6 +7,8 @@
     android:layout_marginTop="10dp"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
+    android:transitionName="matchtrans"
+    android:id="@+id/matchcardhistory"
     app:cardElevation="10dp"
     app:cardCornerRadius="10dp">
 

@@ -1,10 +1,13 @@
 package in.ac.mace.abhinavtk.mpl;
 
 import android.content.Intent;
+import android.os.Build;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
+import android.widget.ImageView;
 
 public class Teams extends AppCompatActivity {
 
@@ -25,56 +28,97 @@ public class Teams extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 intent.putExtra("team","Club De Dinkan");
-                startActivity(intent);
+                if(Build.VERSION.SDK_INT >=Build.VERSION_CODES.LOLLIPOP){
+                    final CardView karaimg = findViewById(R.id.dinkcard);
+                    ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(Teams.this,(View)karaimg,"iconteam");
+                    startActivity(intent,optionsCompat.toBundle());
+                }else
+                    startActivity(intent);
             }
         });
         bell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 intent.putExtra("team","Bellaries FC");
-                startActivity(intent);
+                if(Build.VERSION.SDK_INT >=Build.VERSION_CODES.LOLLIPOP){
+                    final CardView karaimg = findViewById(R.id.bellcard);
+                    ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(Teams.this,(View)karaimg,"iconteam");
+                    startActivity(intent,optionsCompat.toBundle());
+                }else
+                    startActivity(intent);
             }
         });
         manav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 intent.putExtra("team","Real Manavalan FC");
-                startActivity(intent);
+                if(Build.VERSION.SDK_INT >=Build.VERSION_CODES.LOLLIPOP){
+                    final CardView karaimg = findViewById(R.id.manavcard);
+                    ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(Teams.this,(View)karaimg,"iconteam");
+                    startActivity(intent,optionsCompat.toBundle());
+                }else
+                    startActivity(intent);
             }
         });
         ponji.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 intent.putExtra("team","Ponjikkara FC");
-                startActivity(intent);
+                if(Build.VERSION.SDK_INT >=Build.VERSION_CODES.LOLLIPOP){
+                    final CardView karaimg = findViewById(R.id.ponjicard);
+                    ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(Teams.this,(View)karaimg,"iconteam");
+                    startActivity(intent,optionsCompat.toBundle());
+                }else
+                    startActivity(intent);
             }
         });
         mara.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 intent.putExtra("team","FC Marakkar");
-                startActivity(intent);
+                if(Build.VERSION.SDK_INT >=Build.VERSION_CODES.LOLLIPOP){
+                    final CardView karaimg = findViewById(R.id.maracard);
+                    ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(Teams.this,(View)karaimg,"iconteam");
+                    startActivity(intent,optionsCompat.toBundle());
+                }else
+                    startActivity(intent);
             }
         });
         che.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 intent.putExtra("team","Chekuthans FC");
-                startActivity(intent);
+                if(Build.VERSION.SDK_INT >=Build.VERSION_CODES.LOLLIPOP){
+                    final CardView karaimg = findViewById(R.id.checard);
+                    ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(Teams.this,(View)karaimg,"iconteam");
+                    startActivity(intent,optionsCompat.toBundle());
+                }else
+                    startActivity(intent);
             }
         });
         dash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 intent.putExtra("team","Dashamoolam FC");
-                startActivity(intent);
+                if(Build.VERSION.SDK_INT >=Build.VERSION_CODES.LOLLIPOP){
+                    final CardView karaimg = findViewById(R.id.dashacard);
+                    ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(Teams.this,(View)karaimg,"iconteam");
+                    startActivity(intent,optionsCompat.toBundle());
+                }else
+                    startActivity(intent);
             }
         });
+
         kara.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 intent.putExtra("team","Karakkambi FC");
-                startActivity(intent);
+                if(Build.VERSION.SDK_INT >=Build.VERSION_CODES.LOLLIPOP){
+                    final CardView karaimg = findViewById(R.id.karacard);
+                    ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(Teams.this,(View)karaimg,"iconteam");
+                    startActivity(intent,optionsCompat.toBundle());
+                }else
+                    startActivity(intent);
             }
         });
     }

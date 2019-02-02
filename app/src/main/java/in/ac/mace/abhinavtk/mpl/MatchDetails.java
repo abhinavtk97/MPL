@@ -127,6 +127,9 @@ public class MatchDetails extends AppCompatActivity {
                                     case "Real Manavalan FC":t1=R.drawable.manav; break;
                                     case "Ponjikkara": t1=R.drawable.ponji; break;
                                     case "FC Marakkar":t1=R.drawable.mara; break;
+                                    case "Chekuthans FC":t1=R.drawable.che;break;
+                                    case "Dashamoolam FC":t1=R.drawable.dasha;break;
+                                    case "Karakkambi FC":t1=R.drawable.kara;break;
                                 }
                                 switch (queryDocumentSnapshots.getString("team2")){
                                     case "Club De Dinkan":t2=R.drawable.dink; break;
@@ -134,6 +137,9 @@ public class MatchDetails extends AppCompatActivity {
                                     case "Real Manavalan FC":t2=R.drawable.manav; break;
                                     case "Ponjikkara": t2=R.drawable.ponji; break;
                                     case "FC Marakkar":t2=R.drawable.mara; break;
+                                    case "Chekuthans FC":t1=R.drawable.che;break;
+                                    case "Dashamoolam FC":t1=R.drawable.dasha;break;
+                                    case "Karakkambi FC":t1=R.drawable.kara;break;
                                 }
 
                                 team1logo.setImageResource(t1);

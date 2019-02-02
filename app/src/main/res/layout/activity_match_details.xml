@@ -23,6 +23,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="10dp"
     android:layout_marginLeft="10dp"
+    android:transitionName="matchtrans"
     android:layout_marginRight="10dp"
     app:cardElevation="10dp"
     app:cardCornerRadius="10dp">
