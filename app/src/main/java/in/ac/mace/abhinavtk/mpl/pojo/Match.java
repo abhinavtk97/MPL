@@ -10,12 +10,13 @@ public class Match {
     private String team1stat;
     private String team2stat;
     private boolean live;
+    private boolean over;
 
     public Match(){
         //empty
     }
 
-    public Match(String team1, String team2,int team1goal,int team2goal, String datetime, String team1stat, String team2stat, boolean live) {
+    public Match(String team1, String team2,int team1goal,int team2goal, String datetime, String team1stat, String team2stat, boolean live,boolean over) {
         this.team1 = team1;
         this.team2 = team2;
         this.team1goal=team1goal;
@@ -24,6 +25,7 @@ public class Match {
         this.team1stat = team1stat;
         this.team2stat = team2stat;
         this.live = live;
+        this.over=over;
     }
 
     public String getTeam1() {
@@ -88,5 +90,13 @@ public class Match {
 
     public void setTeam2goal(int team2goal) {
         this.team2goal = team2goal;
+    }
+
+    public boolean isOver() {
+        return over;
+    }
+
+    public void setOver(boolean over) {
+        this.over = over;
     }
 }

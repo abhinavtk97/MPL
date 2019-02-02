@@ -20,7 +20,9 @@
         <activity android:name=".MatchDetails" />
         <activity android:name=".Statistics" />
         <activity android:name=".Teams" />
-        <activity android:name=".TeamDetails"></activity>
+        <activity android:name=".TeamDetails" />
+        <activity android:name=".Fixture" />
+        <activity android:name=".PointsTable"></activity>
     </application>
 
 </manifest>

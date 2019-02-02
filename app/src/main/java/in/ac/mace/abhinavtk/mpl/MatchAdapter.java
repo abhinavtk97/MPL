@@ -25,11 +25,16 @@ public class MatchAdapter extends FirestoreRecyclerAdapter<Match,MatchAdapter.Ma
 
     @Override
     protected void onBindViewHolder(@NonNull MatchHolder holder, int position, @NonNull Match model) {
-        holder.team1goal.setText(String.valueOf(model.getTeam1goal()));
-        holder.team2goal.setText(String.valueOf(model.getTeam2goal()));
+
+        if(model.isOver()){
+            holder.team1goal.setText(String.valueOf(model.getTeam1goal()));
+            holder.team2goal.setText(String.valueOf(model.getTeam2goal()));
+            holder.team1stat.setText(model.getTeam1stat());
+            holder.team2stat.setText(model.getTeam2stat());
+        }
+
         holder.datetime.setText(model.getDatetime());
-        holder.team1stat.setText(model.getTeam1stat());
-        holder.team2stat.setText(model.getTeam2stat());
+
         if(model.isLive()){
             holder.live.setVisibility(View.VISIBLE);
         }else {

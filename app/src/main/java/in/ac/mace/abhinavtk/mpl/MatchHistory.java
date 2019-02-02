@@ -4,9 +4,11 @@ import android.app.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.Toast;
 
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -66,9 +68,15 @@ public class MatchHistory extends Activity implements MatchAdapter.OnItemClickLi
 
     @Override
     public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
-        Intent intent = new Intent(MatchHistory.this,MatchDetails.class);
-        intent.putExtra("snapshot",documentSnapshot.getId());
-        startActivity(intent);
+        if(documentSnapshot.get("over")!=null) {
+            if ((boolean) documentSnapshot.get("over")) {
+                Intent intent = new Intent(MatchHistory.this, MatchDetails.class);
+                intent.putExtra("snapshot", documentSnapshot.getId());
+                startActivity(intent);
+            }else {
+                Toast.makeText(MatchHistory.this,"Match not started",Toast.LENGTH_LONG).show();
+            }
+        }
 
     }
 }

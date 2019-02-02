@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:stretchColumns="2">
+<TableRow>
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/pointnumber"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="#"/>
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/pointicon"
+        android:padding="3dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/pointname"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="Team"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/pointM"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="M"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:padding="3dp"
+        android:id="@+id/pointW"
+        android:layout_height="match_parent"
+        android:text="W"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="match_parent"
+        android:padding="3dp"
+        android:id="@+id/pointL"
+        android:text="L"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:id="@+id/pointD"
+        android:padding="3dp"
+        android:text="D"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="3dp"
+        android:id="@+id/pointplus"
+        android:text="+/-"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="3dp"
+        android:id="@+id/pointGD"
+        android:text="GD"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:padding="3dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:id="@+id/pointP"
+        android:text="P"/>
+
+</TableRow>
+
+</TableLayout>

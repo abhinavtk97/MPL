@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StyleRes;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -85,6 +86,14 @@ public class MainActivity extends AppCompatActivity {
         getDocId();
         getNextMatch1Data();
         getNextMatch2Data();
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,PointsTable.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -271,6 +280,9 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 }else if(clickedPosition == 2){
                     intent = new Intent(MainActivity.this, Teams.class);
+                    startActivity(intent);
+                }else if(clickedPosition == 3){
+                    intent = new Intent(MainActivity.this, Fixture.class);
                     startActivity(intent);
                 }
 
@@ -476,6 +488,15 @@ public class MainActivity extends AppCompatActivity {
                             boolean live = (boolean)documentSnapshot.get("live");
                             if(live){
                                 docid =  documentSnapshot.getId();
+                                CardView cardView = findViewById(R.id.matchcardhistoryhome1);
+                                cardView.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent intent = new Intent(MainActivity.this,MatchDetails.class);
+                                        intent.putExtra("snapshot",docid);
+                                        startActivity(intent);
+                                    }
+                                });
                                 if(!started)
                                     getMatchData();
                                 return;
