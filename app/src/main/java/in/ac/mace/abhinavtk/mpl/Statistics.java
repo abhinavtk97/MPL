@@ -62,7 +62,7 @@ public class Statistics extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
-        goalref.limit(4).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        goalref.orderBy("number",Query.Direction.DESCENDING).limit(4).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 List<StatisticData> statisticData = new ArrayList<>();
@@ -82,7 +82,7 @@ public class Statistics extends AppCompatActivity {
             }
         });
 
-        assistref.limit(4).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        assistref.orderBy("number",Query.Direction.DESCENDING).limit(4).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 List<StatisticData> statisticData = new ArrayList<>();
@@ -102,7 +102,7 @@ public class Statistics extends AppCompatActivity {
             }
         });
 
-        redref.limit(4).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        redref.orderBy("number",Query.Direction.DESCENDING).limit(4).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 List<StatisticData> statisticData = new ArrayList<>();
@@ -122,7 +122,7 @@ public class Statistics extends AppCompatActivity {
             }
         });
 
-        yellowref.limit(4).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        yellowref.orderBy("number",Query.Direction.DESCENDING).limit(4).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 List<StatisticData> statisticData = new ArrayList<>();

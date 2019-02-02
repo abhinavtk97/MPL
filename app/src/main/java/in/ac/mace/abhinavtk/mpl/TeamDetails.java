@@ -2,38 +2,32 @@ package in.ac.mace.abhinavtk.mpl;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 public class TeamDetails extends AppCompatActivity {
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    String id=null;
 
-    String[] dinkroles = {"FW","FW","FW","FW","FW","FW","FW","FW","FW","FW","FW","FW"};
-    String[] dinknames = {"Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi",};
+    List<String> players= new ArrayList<>();
+    List<String> allroles=new ArrayList<>();
+    List<TextView> roles = new ArrayList<>();
+    List<TextView> names = new ArrayList<>();
 
-    String[] bellroles = {"FW","FW","FW","FW","FW","FW","FW","FW","FW","FW","FW","FW"};
-    String[] bellnames = {"Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi",};
-
-    String[] manavroles = {"FW","FW","FW","FW","FW","FW","FW","FW","FW","FW","FW","FW"};
-    String[] manavnames = {"Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi",};
-
-    String[] ponjiroles = {"FW","FW","FW","FW","FW","FW","FW","FW","FW","FW","FW","FW"};
-    String[] ponjinames = {"Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi",};
-
-    String[] mararoles = {"FW","FW","FW","FW","FW","FW","FW","FW","FW","FW","FW","FW"};
-    String[] maranames = {"Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi",};
-
-    String[] cheroles = {"FW","FW","FW","FW","FW","FW","FW","FW","FW","FW","FW","FW"};
-    String[] chenames = {"Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi",};
-
-    String[] dashroles = {"FW","FW","FW","FW","FW","FW","FW","FW","FW","FW","FW","FW"};
-    String[] dashnames = {"Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi",};
-
-    String[] kararoles = {"FW","FW","FW","FW","FW","FW","FW","FW","FW","FW","FW","FW"};
-    String[] karanames = {"Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi","Abhi",};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +47,19 @@ public class TeamDetails extends AppCompatActivity {
             case "Dashamoolam FC":t1=R.drawable.dasha;break;
             case "Karakkambi FC":t1=R.drawable.kara;break;
         }
+
+
+        switch (team){
+            case "Club De Dinkan":id="dink"; break;
+            case "Bellaries FC" : id="bell"; break;
+            case "Real Manavalan FC":id="mana"; break;
+            case "Ponjikkara FC": id="ponj"; break;
+            case "FC Marakkar":id="mara"; break;
+            case "Chekuthans FC":id="chek";break;
+            case "Dashamoolam FC":id="dash";break;
+            case "Karakkambi FC":id="kara";break;
+        }
+
         imageView.setImageResource(t1);
         TextView role1 = findViewById(R.id.role1);
         TextView role2 = findViewById(R.id.role2);
@@ -67,7 +74,6 @@ public class TeamDetails extends AppCompatActivity {
         TextView role11 = findViewById(R.id.role11);
         TextView role12 = findViewById(R.id.role12);
 
-        List<TextView> roles = new ArrayList<>();
         roles.add(role1);
         roles.add(role2);
         roles.add(role3);
@@ -94,7 +100,6 @@ public class TeamDetails extends AppCompatActivity {
         TextView name11 = findViewById(R.id.name11);
         TextView name12 = findViewById(R.id.name12);
 
-        List<TextView> names = new ArrayList<>();
         names.add(name1);
         names.add(name2);
         names.add(name3);
@@ -108,57 +113,43 @@ public class TeamDetails extends AppCompatActivity {
         names.add(name11);
         names.add(name12);
 
-        String teamroles[]=null, teamnames[]=null;
-        switch (team){
-            case "Club De Dinkan":
-                teamroles=dinkroles;
-                teamnames=dinknames;
-                break;
-            case "Bellaries FC":
-                teamroles=bellroles;
-                teamnames=bellnames;
-                break;
-            case "Real Manavalan FC":
-                teamroles=manavroles;
-                teamnames=manavnames;
-                break;
-            case "Ponjikkara FC":
-                teamroles=ponjiroles;
-                teamnames=ponjinames;
-                break;
-            case "FC Marakkar":
-                teamroles=manavroles;
-                teamnames=manavnames;
-                break;
-            case "Chekuthans FC":
-                teamroles=cheroles;
-                teamnames=chenames;
-                break;
-            case "Dashamoolam FC":
-                teamroles=dashroles;
-                teamnames=dashnames;
-                break;
-            case "Karakkambi FC":
-                teamroles=kararoles;
-                teamnames=karanames;
-                break;
 
-        }
-        if(teamnames!=null && teamroles!=null){
-            for(int i=0;i<roles.size();i++){
-                roles.get(i).setText(teamroles[i]);
-            }
-            for (int i=0;i<names.size();i++){
-                names.get(i).setText(teamnames[i]);
-            }
-        }else{
-            for(int i=0;i<roles.size();i++){
-                roles.get(i).setText("");
-            }
-            for (int i=0;i<names.size();i++){
-                names.get(i).setText("");
-            }
-        }
+        getPlayers();
 
+
+    }
+
+    private void getPlayers(){
+        db.collection("Players").document(id).collection(id)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                        if(e!=null){
+                            Log.e("Firebase","getid failed");
+                            return;
+                        }
+                        List<DocumentSnapshot> docs =  queryDocumentSnapshots.getDocuments();
+                        for(int i=0;i<docs.size();i++){
+                            players.add(docs.get(i).get("name").toString());
+                            allroles.add(docs.get(i).get("role").toString());
+                            Log.e("doing",String.valueOf(docs.size()));
+                        }
+                        if(players!=null && allroles!=null){
+                            for(int i=0;i<allroles.size();i++){
+                                roles.get(i).setText(allroles.get(i));
+                            }
+                            for (int i=0;i<players.size();i++){
+                                names.get(i).setText(players.get(i));
+                            }
+                        }else{
+                            for(int i=0;i<allroles.size();i++){
+                                roles.get(i).setText("");
+                            }
+                            for (int i=0;i<players.size();i++){
+                                names.get(i).setText("");
+                            }
+                        }
+                    }
+                });
     }
 }
