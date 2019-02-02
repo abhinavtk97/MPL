@@ -252,6 +252,9 @@ public class MainActivity extends AppCompatActivity {
                 }else if(clickedPosition == 1){
                     intent = new Intent(MainActivity.this, Statistics.class);
                     startActivity(intent);
+                }else if(clickedPosition == 2){
+                    intent = new Intent(MainActivity.this, Teams.class);
+                    startActivity(intent);
                 }
 
             } else if (clickedPosition > activeCardPosition) {
