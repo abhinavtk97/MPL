@@ -24,12 +24,10 @@ public class MatchDataAdapter extends FirestoreRecyclerAdapter<MatchData,MatchDa
     @Override
     protected void onBindViewHolder(@NonNull MatchHolder holder, int position, @NonNull MatchData model) {
 
-        if(model.getDescription().equals("")){
-            holder.team1data.setText(model.getTeam1Message());
-            holder.team2data.setText(model.getTeam2Message());
+            holder.message.setText(model.getMessage());
             int t1=0,t2=0;
 
-            switch (model.getTeam1()){
+            switch (model.getTeam()){
                 case "Club De Dinkan":t1=R.drawable.dink; break;
                 case "Bellaries FC" : t1=R.drawable.bell; break;
                 case "Real Manavalan FC":t1=R.drawable.manav; break;
@@ -39,26 +37,16 @@ public class MatchDataAdapter extends FirestoreRecyclerAdapter<MatchData,MatchDa
                 case "Dashamoolam FC":t1=R.drawable.dasha;break;
                 case "Karakkambi FC":t1=R.drawable.kara;break;
             }
-            switch (model.getTeam2()){
-                case "Club De Dinkan":t2=R.drawable.dink; break;
-                case "Bellaries FC" : t2=R.drawable.bell; break;
-                case "Real Manavalan FC":t2=R.drawable.manav; break;
-                case "Ponjikkara": t2=R.drawable.ponji; break;
-                case "FC Marakkar":t2=R.drawable.mara; break;
-                case "Chekuthans FC":t1=R.drawable.che;break;
-                case "Dashamoolam FC":t1=R.drawable.dasha;break;
-                case "Karakkambi FC":t1=R.drawable.kara;break;
-
-            }
-            Log.d("verybad","iamhere");
-            holder.team1logodata.setImageResource(t1);
-            holder.team2logodata.setImageResource(t2);
-            holder.description.setText("");
-        }else{
-            holder.team1data.setText("");
-            holder.team2data.setText("");
-            holder.description.setText(model.getDescription());
+        switch (model.getHeading()){
+            case "Red Card":t2=R.drawable.dink; break;
+            case "Yellow Card" : t2=R.drawable.bell; break;
+            case "Goal":t2=R.drawable.manav; break;
         }
+
+            holder.logodata.setImageResource(t1);
+            holder.infodata.setImageResource(t2);
+            holder.heading.setText(model.getHeading());
+            holder.description.setText(model.getDescription());
 
 
 
@@ -73,20 +61,20 @@ public class MatchDataAdapter extends FirestoreRecyclerAdapter<MatchData,MatchDa
 
     class MatchHolder extends RecyclerView.ViewHolder {
 
-        TextView team1data;
-        TextView team2data;
+        TextView heading;
         TextView description;
-        ImageView team1logodata;
-        ImageView team2logodata;
+        TextView message;
+        ImageView logodata;
+        ImageView infodata;
 
 
         public MatchHolder(View itemView){
             super(itemView);
-            team1data = itemView.findViewById(R.id.team1data);
-            team2data = itemView.findViewById(R.id.team2data);
+            message = itemView.findViewById(R.id.team1data);
+            heading = itemView.findViewById(R.id.heading);
             description = itemView.findViewById(R.id.description);
-            team1logodata = itemView.findViewById(R.id.team1logodata);
-            team2logodata = itemView.findViewById(R.id.team2logodata);
+            logodata = itemView.findViewById(R.id.team1logodata);
+            infodata = itemView.findViewById(R.id.team1infodata);
             Log.d("fir","start");
 
         }

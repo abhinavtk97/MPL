@@ -95,6 +95,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
+
     }
 
     private void initRecyclerView() {
@@ -419,15 +422,11 @@ public class MainActivity extends AppCompatActivity {
                                 TextView team1goal = findViewById(R.id.team1goalhome1);
                                 TextView team2goal = findViewById(R.id.team2goalhome1);
                                 TextView datetime = findViewById(R.id.datetimehome1);
-                                TextView team1stat = findViewById(R.id.team1stathome1);
-                                TextView team2stat = findViewById(R.id.team2stathome1);
                                 ImageView team1logo = findViewById(R.id.team1logohome1);
                                 ImageView team2logo = findViewById(R.id.team2logohome1);
                                 team1goal.setText(String.valueOf(queryDocumentSnapshots.getDouble("team1goal").intValue()));
                                 team2goal.setText(String.valueOf(queryDocumentSnapshots.getDouble("team2goal").intValue()));
                                 datetime.setText(queryDocumentSnapshots.getString("datetime"));
-                                team1stat.setText(queryDocumentSnapshots.getString("team1stat"));
-                                team2stat.setText(queryDocumentSnapshots.getString("team2stat"));
                                 if(queryDocumentSnapshots.getBoolean("live")){
                                     live.setVisibility(View.VISIBLE);
                                     vs.setText("-");
@@ -484,7 +483,7 @@ public class MainActivity extends AppCompatActivity {
                             Log.e("Firebase","getid failed");
                             return;
                         }
-                        for (QueryDocumentSnapshot documentSnapshot :queryDocumentSnapshots){
+                        for (final QueryDocumentSnapshot documentSnapshot :queryDocumentSnapshots){
                             boolean live = (boolean)documentSnapshot.get("live");
                             if(live){
                                 docid =  documentSnapshot.getId();
@@ -494,6 +493,8 @@ public class MainActivity extends AppCompatActivity {
                                     public void onClick(View v) {
                                         Intent intent = new Intent(MainActivity.this,MatchDetails.class);
                                         intent.putExtra("snapshot",docid);
+                                        intent.putExtra("team1",documentSnapshot.get("team1").toString());
+                                        intent.putExtra("team2",documentSnapshot.get("team2").toString());
                                         startActivity(intent);
                                     }
                                 });

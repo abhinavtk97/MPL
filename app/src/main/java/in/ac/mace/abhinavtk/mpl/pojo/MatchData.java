@@ -1,55 +1,49 @@
 package in.ac.mace.abhinavtk.mpl.pojo;
 
+import com.google.firebase.Timestamp;
+
 public class MatchData {
 
-    private String team1;
-    private String team2;
-    private String team1Message;
-    private String team2Message;
+    private String team;
+    private String heading;
+    private String message;
     private String description;
+    private Timestamp timestamp;
 
     public MatchData(){
         //empty
     }
 
-    public MatchData(String team1, String team2, String team1Message, String team2Message, String description) {
-        this.team1 = team1;
-        this.team2 = team2;
-        this.team1Message = team1Message;
-        this.team2Message = team2Message;
+    public MatchData(String team, String heading, String message, String description,Timestamp timestamp) {
+        this.team = team;
+        this.heading = heading;
+        this.message = message;
         this.description = description;
+        this.timestamp = timestamp;
     }
 
-    public String getTeam1() {
-        return team1;
+    public String getTeam() {
+        return team;
     }
 
-    public void setTeam1(String team1) {
-        this.team1 = team1;
+    public void setTeam(String team) {
+        this.team = team;
     }
 
-    public String getTeam2() {
-        return team2;
+    public String getHeading() {
+        return heading;
     }
 
-    public void setTeam2(String team2) {
-        this.team2 = team2;
+    public void setHeading(String heading) {
+        this.heading = heading;
     }
 
-    public String getTeam1Message() {
-        return team1Message;
+    public String getMessage() {
+        return message;
     }
 
-    public void setTeam1Message(String team1Message) {
-        this.team1Message = team1Message;
-    }
-
-    public String getTeam2Message() {
-        return team2Message;
-    }
-
-    public void setTeam2Message(String team2Message) {
-        this.team2Message = team2Message;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String getDescription() {
@@ -58,5 +52,13 @@ public class MatchData {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
     }
 }

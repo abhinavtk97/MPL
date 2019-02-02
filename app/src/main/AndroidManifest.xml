@@ -22,7 +22,8 @@
         <activity android:name=".Teams" />
         <activity android:name=".TeamDetails" />
         <activity android:name=".Fixture" />
-        <activity android:name=".PointsTable"></activity>
+        <activity android:name=".PointsTable" />
+        <activity android:name=".EditMain"></activity>
     </application>
 
 </manifest>

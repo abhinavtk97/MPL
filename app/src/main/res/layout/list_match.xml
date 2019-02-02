@@ -117,16 +117,16 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/team1goal"
+                android:id="@+id/team2goal"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:gravity="center"
-                android:textSize="25sp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
+                android:gravity="center"
                 android:text=""
+                android:textAppearance="@style/cardHeadTitle"
                 android:textColor="#000000"
-                android:textAppearance="@style/cardHeadTitle" />
+                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/vs"
@@ -148,16 +148,16 @@
                 app:layout_constraintVertical_bias="0.552" />
 
             <TextView
-                android:id="@+id/team2goal"
+                android:id="@+id/team1goal"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:gravity="center"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:textSize="25sp"
+                android:gravity="center"
                 android:text=""
+                android:textAppearance="@style/cardHeadTitle"
                 android:textColor="#000000"
-                android:textAppearance="@style/cardHeadTitle" />
+                android:textSize="25sp" />
         </LinearLayout>
 
         <ProgressBar
