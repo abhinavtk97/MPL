@@ -54,7 +54,7 @@ public class MatchHistory extends AppCompatActivity implements MatchAdapter.OnIt
     private SwitchDateTimeDialogFragment dateTimeDialogFragment;
 
     private static final String TAG_DATETIME_FRAGMENT = "TAG_DATETIME_FRAGMENT";
-    String time=null ;
+    Timestamp time=null ;
 
     private String team1d="Club De Dinkan",team2d="Club De Dinkan";
     @Override
@@ -110,22 +110,21 @@ public class MatchHistory extends AppCompatActivity implements MatchAdapter.OnIt
 
             @Override
             public void onPositiveButtonClick(Date date) {
-                time = mydateformat.format(date);
-                final Map<String,Object> tosend = new HashMap<>();
-                tosend.put("live",false);
-                tosend.put("over",false);
-                tosend.put("team1",team1d);
-                tosend.put("team2",team2d);
-                tosend.put("datetime",time);
-                tosend.put("team2goal",0);
-                tosend.put("team1goal",0);
+                final Match match = new Match();
+                match.setDatetime(date);
+                match.setOver(false);
+                match.setLive(false);
+                match.setTeam1(team1d);
+                match.setTeam2(team2d);
+                match.setTeam1goal(0);
+                match.setTeam2goal(0);
                 new AlertDialog.Builder(MatchHistory.this).setTitle("Confirm")
                         .setMessage("Are you sure to add this match")
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                db.collection("Matches").add(tosend);
+                                db.collection("Matches").add(match);
                             }
                         }).setNegativeButton(android.R.string.no,null).show();
             }

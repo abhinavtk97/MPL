@@ -19,7 +19,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="MPL"
+            android:text="@string/app_name"
+            android:id="@+id/appname"
             android:textAppearance="@style/cardHeadTitle"
             android:textColor="#000000"
             android:gravity="center"
@@ -604,8 +605,10 @@
             android:layout_centerVertical="true"
             android:id="@+id/frameLayout">
 
-            <TextSwitcher
-                android:id="@+id/ts_temperature"
+            <ImageView
+                android:id="@+id/instagram"
+                android:src="@drawable/insta"
+                android:padding="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"/>

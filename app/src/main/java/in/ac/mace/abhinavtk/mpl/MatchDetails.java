@@ -31,6 +31,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -199,6 +200,7 @@ public class MatchDetails extends AppCompatActivity implements AdapterView.OnIte
         Log.d("firebase","setting up");
     }
 
+    final SimpleDateFormat mydateformat = new SimpleDateFormat("d MMM yyyy HH:mm",java.util.Locale.getDefault());
     private void getMatchData(){
         db.collection("Matches").document(docid)
                 .addSnapshotListener(new EventListener<DocumentSnapshot>() {
@@ -212,9 +214,10 @@ public class MatchDetails extends AppCompatActivity implements AdapterView.OnIte
                         Log.d("Firebase","Listenong");
                         if(queryDocumentSnapshots!=null&&queryDocumentSnapshots.exists()){
                             {
+                                Match match = queryDocumentSnapshots.toObject(Match.class);
                                 team1goal.setText(String.valueOf(queryDocumentSnapshots.getDouble("team1goal").intValue()));
                                 team2goal.setText(String.valueOf(queryDocumentSnapshots.getDouble("team2goal").intValue()));
-                                datetime.setText(queryDocumentSnapshots.getString("datetime"));
+                                datetime.setText(mydateformat.format(match.getDatetime()));
                                 team1stat.setText(queryDocumentSnapshots.getString("team1stat"));
                                 team2stat.setText(queryDocumentSnapshots.getString("team2stat"));
                                 if(queryDocumentSnapshots.getBoolean("live")){
@@ -240,10 +243,12 @@ public class MatchDetails extends AppCompatActivity implements AdapterView.OnIte
                                     case "Real Manavalan FC":t2=R.drawable.manav; break;
                                     case "Ponjikkara FC": t2=R.drawable.ponji; break;
                                     case "FC Marakkar":t2=R.drawable.mara; break;
-                                    case "Chekuthans FC":t1=R.drawable.che;break;
-                                    case "Dashamoolam FC":t1=R.drawable.dasha;break;
-                                    case "Karakkambi FC":t1=R.drawable.kara;break;
+                                    case "Chekuthans FC":t2=R.drawable.che;break;
+                                    case "Dashamoolam FC":t2=R.drawable.dasha;break;
+                                    case "Karakkambi FC":t2=R.drawable.kara;break;
                                 }
+
+                                Log.e("Fireicons",String.valueOf(t1)+queryDocumentSnapshots.getString("team1")+" "+t2+queryDocumentSnapshots.getString("team2"));
 
                                 team1logo.setImageResource(t1);
                                 team2logo.setImageResource(t2);

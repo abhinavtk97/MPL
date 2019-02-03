@@ -68,11 +68,7 @@ public class TeamDetails extends AppCompatActivity {
         TextView role5 = findViewById(R.id.role5);
         TextView role6 = findViewById(R.id.role6);
         TextView role7 = findViewById(R.id.role7);
-        TextView role8 = findViewById(R.id.role8);
-        TextView role9 = findViewById(R.id.role9);
-        TextView role10 = findViewById(R.id.role10);
-        TextView role11 = findViewById(R.id.role11);
-        TextView role12 = findViewById(R.id.role12);
+
 
         roles.add(role1);
         roles.add(role2);
@@ -81,11 +77,7 @@ public class TeamDetails extends AppCompatActivity {
         roles.add(role5);
         roles.add(role6);
         roles.add(role7);
-        roles.add(role8);
-        roles.add(role9);
-        roles.add(role10);
-        roles.add(role11);
-        roles.add(role12);
+
 
         TextView name1 = findViewById(R.id.name1);
         TextView name2 = findViewById(R.id.name2);
@@ -94,11 +86,7 @@ public class TeamDetails extends AppCompatActivity {
         TextView name5 = findViewById(R.id.name5);
         TextView name6 = findViewById(R.id.name6);
         TextView name7 = findViewById(R.id.name7);
-        TextView name8 = findViewById(R.id.name8);
-        TextView name9 = findViewById(R.id.name9);
-        TextView name10 = findViewById(R.id.name10);
-        TextView name11 = findViewById(R.id.name11);
-        TextView name12 = findViewById(R.id.name12);
+
 
         names.add(name1);
         names.add(name2);
@@ -107,11 +95,6 @@ public class TeamDetails extends AppCompatActivity {
         names.add(name5);
         names.add(name6);
         names.add(name7);
-        names.add(name8);
-        names.add(name9);
-        names.add(name10);
-        names.add(name11);
-        names.add(name12);
 
 
         getPlayers();
