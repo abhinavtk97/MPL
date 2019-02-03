@@ -39,9 +39,9 @@ public class MatchDataAdapter extends FirestoreRecyclerAdapter<MatchData,MatchDa
                 case "Karakkambi FC":t1=R.drawable.kara;break;
             }
             switch (model.getHeading()){
-                case "Red Card":t2=R.drawable.dink; break;
-                case "Yellow Card" : t2=R.drawable.bell; break;
-                case "Goal":t2=R.drawable.manav; break;
+                case "Red Card":t2=R.drawable.red; break;
+                case "Yellow Card" : t2=R.drawable.yellow; break;
+                case "Goal":t2=R.drawable.goal; break;
             }
             holder.logodata.setImageResource(t1);
         holder.infodata.setImageResource(t2);

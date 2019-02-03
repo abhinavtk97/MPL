@@ -92,6 +92,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        FloatingActionButton fab1 = findViewById(R.id.fababout);
+        fab1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,About.class);
+                startActivity(intent);
+            }
+        });
+
         ImageView insta = findViewById(R.id.instagram);
         insta.setOnClickListener(new View.OnClickListener() {
             @Override

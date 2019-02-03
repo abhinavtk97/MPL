@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" android:theme="@style/SplashTheme">
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,7 +24,8 @@
         <activity android:name=".Teams" />
         <activity android:name=".TeamDetails" />
         <activity android:name=".Fixture" />
-        <activity android:name=".PointsTable"></activity>
+        <activity android:name=".PointsTable" />
+        <activity android:name=".About"></activity>
     </application>
 
 </manifest>
