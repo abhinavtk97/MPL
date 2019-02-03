@@ -12,6 +12,8 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.DocumentSnapshot;
 
+import java.text.SimpleDateFormat;
+
 import in.ac.mace.abhinavtk.mpl.pojo.Match;
 
 public class MatchAdapter extends FirestoreRecyclerAdapter<Match,MatchAdapter.MatchHolder> {
@@ -23,6 +25,8 @@ public class MatchAdapter extends FirestoreRecyclerAdapter<Match,MatchAdapter.Ma
         super(options);
     }
 
+    SimpleDateFormat mydateformat = new SimpleDateFormat("d MMM yyyy",java.util.Locale.getDefault());
+
     @Override
     protected void onBindViewHolder(@NonNull MatchHolder holder, int position, @NonNull Match model) {
 
@@ -33,7 +37,7 @@ public class MatchAdapter extends FirestoreRecyclerAdapter<Match,MatchAdapter.Ma
             holder.team2stat.setText(model.getTeam2stat());
         }
 
-        holder.datetime.setText(model.getDatetime());
+        holder.datetime.setText(mydateformat.format(model.getDatetime()));
 
         if(model.isLive()){
             holder.live.setVisibility(View.VISIBLE);
@@ -46,7 +50,7 @@ public class MatchAdapter extends FirestoreRecyclerAdapter<Match,MatchAdapter.Ma
             case "Club De Dinkan":t1=R.drawable.dink; break;
             case "Bellaries FC" : t1=R.drawable.bell; break;
             case "Real Manavalan FC":t1=R.drawable.manav; break;
-            case "Ponjikkara": t1=R.drawable.ponji; break;
+            case "Ponjikkara FC": t1=R.drawable.ponji; break;
             case "FC Marakkar":t1=R.drawable.mara; break;
             case "Chekuthans FC":t1=R.drawable.che;break;
             case "Dashamoolam FC":t1=R.drawable.dasha;break;
@@ -56,11 +60,11 @@ public class MatchAdapter extends FirestoreRecyclerAdapter<Match,MatchAdapter.Ma
             case "Club De Dinkan":t2=R.drawable.dink; break;
             case "Bellaries FC" : t2=R.drawable.bell; break;
             case "Real Manavalan FC":t2=R.drawable.manav; break;
-            case "Ponjikkara": t2=R.drawable.ponji; break;
+            case "Ponjikkara FC": t2=R.drawable.ponji; break;
             case "FC Marakkar":t2=R.drawable.mara; break;
-            case "Chekuthans FC":t1=R.drawable.che;break;
-            case "Dashamoolam FC":t1=R.drawable.dasha;break;
-            case "Karakkambi FC":t1=R.drawable.kara;break;
+            case "Chekuthans FC":t2=R.drawable.che;break;
+            case "Dashamoolam FC":t2=R.drawable.dasha;break;
+            case "Karakkambi FC":t2=R.drawable.kara;break;
         }
 
         holder.team1logo.setImageResource(t1);

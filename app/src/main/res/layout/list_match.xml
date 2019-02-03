@@ -117,7 +117,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/team1goal"
+                android:id="@+id/team2goal"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:gravity="center"
@@ -148,7 +148,7 @@
                 app:layout_constraintVertical_bias="0.552" />
 
             <TextView
-                android:id="@+id/team2goal"
+                android:id="@+id/team1goal"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:gravity="center"

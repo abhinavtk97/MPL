@@ -38,7 +38,7 @@ public class MatchHistory extends Activity implements MatchAdapter.OnItemClickLi
     }
 
     private void setUpRecyclerView(){
-        Query query =matchreference.limit(100);
+        Query query =matchreference.orderBy("datetime");
         FirestoreRecyclerOptions<Match> options = new FirestoreRecyclerOptions.Builder<Match>()
                 .setQuery(query,Match.class)
                 .build();
@@ -72,6 +72,8 @@ public class MatchHistory extends Activity implements MatchAdapter.OnItemClickLi
             if ((boolean) documentSnapshot.get("over")) {
                 Intent intent = new Intent(MatchHistory.this, MatchDetails.class);
                 intent.putExtra("snapshot", documentSnapshot.getId());
+                intent.putExtra("team1",documentSnapshot.get("team1").toString());
+                intent.putExtra("team2",documentSnapshot.get("team2").toString());
                 startActivity(intent);
             }else {
                 Toast.makeText(MatchHistory.this,"Match not started",Toast.LENGTH_LONG).show();

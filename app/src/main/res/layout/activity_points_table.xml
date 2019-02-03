@@ -16,12 +16,12 @@
         android:text="Points Table"/>
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:stretchColumns="2">
+        android:layout_height="wrap_content">
         <TableRow>
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0px"
                 android:id="@+id/pointnumber"
+                android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:paddingLeft="3dp"
@@ -34,66 +34,74 @@
                 android:paddingLeft="3dp"
                 android:paddingRight="3dp"/>
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0px"
                 android:layout_height="match_parent"
                 android:id="@+id/pointname"
                 android:gravity="center"
                 android:paddingLeft="3dp"
+                android:layout_weight="3"
                 android:paddingRight="3dp"
                 android:text="Team"
                 />
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0px"
                 android:layout_height="match_parent"
                 android:id="@+id/pointM"
                 android:gravity="center"
+                android:layout_weight="1"
                 android:paddingLeft="3dp"
                 android:paddingRight="3dp"
                 android:text="M"/>
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0px"
                 android:gravity="center"
                 android:paddingLeft="3dp"
                 android:paddingRight="3dp"
                 android:id="@+id/pointW"
+                android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:text="W"/>
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0px"
                 android:gravity="center"
+                android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:paddingLeft="3dp"
                 android:paddingRight="3dp"
                 android:id="@+id/pointL"
                 android:text="L"/>
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0px"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:layout_weight="1"
                 android:id="@+id/pointD"
                 android:paddingLeft="3dp"
                 android:paddingRight="3dp"
                 android:text="D"/>
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0px"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:paddingLeft="3dp"
                 android:paddingRight="3dp"
                 android:id="@+id/pointplus"
                 android:text="+/-"/>
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0px"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:layout_weight="1"
                 android:paddingLeft="3dp"
                 android:paddingRight="3dp"
                 android:id="@+id/pointGD"
                 android:text="GD"/>
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0px"
                 android:paddingLeft="3dp"
                 android:paddingRight="3dp"
+                android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:id="@+id/pointP"

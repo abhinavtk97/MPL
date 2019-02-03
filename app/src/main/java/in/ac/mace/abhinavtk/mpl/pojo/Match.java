@@ -1,12 +1,14 @@
 package in.ac.mace.abhinavtk.mpl.pojo;
 
+import java.util.Date;
+
 public class Match {
 
     private String team1;
     private String team2;
     private int team1goal;
     private int team2goal;
-    private String datetime;
+    private Date datetime;
     private String team1stat;
     private String team2stat;
     private boolean live;
@@ -16,7 +18,7 @@ public class Match {
         //empty
     }
 
-    public Match(String team1, String team2,int team1goal,int team2goal, String datetime, String team1stat, String team2stat, boolean live,boolean over) {
+    public Match(String team1, String team2,int team1goal,int team2goal, Date datetime, String team1stat, String team2stat, boolean live,boolean over) {
         this.team1 = team1;
         this.team2 = team2;
         this.team1goal=team1goal;
@@ -44,11 +46,11 @@ public class Match {
         this.team2 = team2;
     }
 
-    public String getDatetime() {
+    public Date getDatetime() {
         return datetime;
     }
 
-    public void setDatetime(String datetime) {
+    public void setDatetime(Date datetime) {
         this.datetime = datetime;
     }
 

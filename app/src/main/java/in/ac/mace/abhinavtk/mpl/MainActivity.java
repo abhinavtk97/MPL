@@ -3,9 +3,11 @@ package in.ac.mace.abhinavtk.mpl;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.ActivityOptions;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
@@ -38,30 +40,26 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.ramotion.cardslider.CardSliderLayoutManager;
 import com.ramotion.cardslider.CardSnapHelper;
 import in.ac.mace.abhinavtk.mpl.cards.SliderAdapter;
+import in.ac.mace.abhinavtk.mpl.pojo.Match;
 import in.ac.mace.abhinavtk.mpl.pojo.StatisticData;
 import in.ac.mace.abhinavtk.mpl.utils.DecodeBitmapTask;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.annotation.Nullable;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final int[] pics = {R.drawable.p1, R.drawable.p2, R.drawable.p3, R.drawable.p4, R.drawable.p5};
-    private final int[] descriptions = {R.string.text1, R.string.text2, R.string.text3, R.string.text4, R.string.text5};
+    private final int[] pics = {R.drawable.image8, R.drawable.image3, R.drawable.image4, R.drawable.image6};
     private final String[] countries = {"MATCH HISTORY", "STATISTICS", "TEAMS", "FIXTURE"};
-    private final String[] places = {"The Louvre", "Gwanghwamun", "Tower Bridge", "Temple of Heaven", "Aegeana Sea"};
-    private final String[] temperatures = {"", "", "", "", ""};
-    private final String[] times = {"Aug 1 - Dec 15    7:00-18:00", "Sep 5 - Nov 10    8:00-16:00", "Mar 8 - May 21    7:00-18:00"};
 
     private final SliderAdapter sliderAdapter = new SliderAdapter(pics, 4, new OnCardClickListener());
 
     private CardSliderLayoutManager layoutManger;
     private RecyclerView recyclerView;
-    private TextSwitcher temperatureSwitcher;
-    private TextSwitcher placeSwitcher;
-    private TextSwitcher clockSwitcher;
-    private TextSwitcher descriptionsSwitcher;
     private TextView country1TextView;
     private TextView country2TextView;
     private int countryOffset1;
@@ -76,16 +74,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         live = findViewById(R.id.livehome1);
         vs= findViewById(R.id.vshome1);
         initRecyclerView();
         initCountryText();
-        initSwitchers();
         getDocId();
-        getNextMatch1Data();
-        getNextMatch2Data();
+        getNextDocId();
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +91,23 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        ImageView insta = findViewById(R.id.instagram);
+        insta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("http://instagram.com/_u/takshak18"));
+                i.setPackage("com.instagram.android");
+                try{
+                    startActivity(i);
+                }catch (ActivityNotFoundException e){
+                    startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://instagram.com/takshak18")));
+                }
+            }
+        });
+
+        TextView appname = findViewById(R.id.appname);
+        appname.setTypeface(Typeface.createFromAsset(getAssets(),"open-sans-extrabold.ttf"));
 
     }
 
@@ -117,13 +131,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-    private void initSwitchers() {
-        temperatureSwitcher = (TextSwitcher) findViewById(R.id.ts_temperature);
-        temperatureSwitcher.setFactory(new TextViewFactory(R.style.TemperatureTextView, true));
-        temperatureSwitcher.setCurrentText(temperatures[0]);
-
-    }
 
     private void initCountryText() {
         countryAnimDuration = getResources().getInteger(R.integer.labels_animation_duration);
@@ -204,9 +211,6 @@ public class MainActivity extends AppCompatActivity {
 
         setCountryText(countries[pos], left2right);
 
-        temperatureSwitcher.setInAnimation(MainActivity.this, animH[0]);
-        temperatureSwitcher.setOutAnimation(MainActivity.this, animH[1]);
-        temperatureSwitcher.setText(temperatures[pos % temperatures.length]);
 
     }
 
@@ -295,7 +299,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void getNextMatch1Data(){
-        db.collection("NextMathches").document("Match1")
+        db.collection("Matches").document(ids.get(0))
                 .addSnapshotListener(new EventListener<DocumentSnapshot>() {
                     @Override
                     public void onEvent(@Nullable DocumentSnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
@@ -306,17 +310,18 @@ public class MainActivity extends AppCompatActivity {
 
                         if(queryDocumentSnapshots!=null&&queryDocumentSnapshots.exists()){
                             {
+                                Match match = queryDocumentSnapshots.toObject(Match.class);
                                 TextView datetime = findViewById(R.id.datetimehome2);
                                 ImageView team1logo = findViewById(R.id.team1logohome2);
                                 ImageView team2logo = findViewById(R.id.team2logohome2);
-                                datetime.setText(queryDocumentSnapshots.getString("datetime"));
+                                datetime.setText(mydateformat.format(match.getDatetime()));
                                 int t1=0,t2=0;
 
                                 switch (queryDocumentSnapshots.getString("team1")){
                                     case "Club De Dinkan":t1=R.drawable.dink; break;
                                     case "Bellaries FC" : t1=R.drawable.bell; break;
                                     case "Real Manavalan FC":t1=R.drawable.manav; break;
-                                    case "Ponjikkara": t1=R.drawable.ponji; break;
+                                    case "Ponjikkara FC": t1=R.drawable.ponji; break;
                                     case "FC Marakkar":t1=R.drawable.mara; break;
                                     case "Chekuthans FC":t1=R.drawable.che;break;
                                     case "Dashamoolam FC":t1=R.drawable.dasha;break;
@@ -326,11 +331,11 @@ public class MainActivity extends AppCompatActivity {
                                     case "Club De Dinkan":t2=R.drawable.dink; break;
                                     case "Bellaries FC" : t2=R.drawable.bell; break;
                                     case "Real Manavalan FC":t2=R.drawable.manav; break;
-                                    case "Ponjikkara": t2=R.drawable.ponji; break;
+                                    case "Ponjikkara FC": t2=R.drawable.ponji; break;
                                     case "FC Marakkar":t2=R.drawable.mara; break;
-                                    case "Chekuthans FC":t1=R.drawable.che;break;
-                                    case "Dashamoolam FC":t1=R.drawable.dasha;break;
-                                    case "Karakkambi FC":t1=R.drawable.kara;break;
+                                    case "Chekuthans FC":t2=R.drawable.che;break;
+                                    case "Dashamoolam FC":t2=R.drawable.dasha;break;
+                                    case "Karakkambi FC":t2=R.drawable.kara;break;
                                 }
 
                                 TextView lv = findViewById(R.id.vshome2);
@@ -350,7 +355,7 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
     private void getNextMatch2Data(){
-        db.collection("NextMathches").document("Match2")
+        db.collection("Matches").document(ids.get(1))
                 .addSnapshotListener(new EventListener<DocumentSnapshot>() {
                     @Override
                     public void onEvent(@Nullable DocumentSnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
@@ -361,17 +366,18 @@ public class MainActivity extends AppCompatActivity {
 
                         if(queryDocumentSnapshots!=null&&queryDocumentSnapshots.exists()){
                             {
+                                Match match = queryDocumentSnapshots.toObject(Match.class);
                                 TextView datetime = findViewById(R.id.datetimehome3);
                                 ImageView team1logo = findViewById(R.id.team1logohome3);
                                 ImageView team2logo = findViewById(R.id.team2logohome3);
-                                datetime.setText(queryDocumentSnapshots.getString("datetime"));
+                                datetime.setText(mydateformat.format(match.getDatetime()));
                                 int t1=0,t2=0;
 
                                 switch (queryDocumentSnapshots.getString("team1")){
                                     case "Club De Dinkan":t1=R.drawable.dink; break;
                                     case "Bellaries FC" : t1=R.drawable.bell; break;
                                     case "Real Manavalan FC":t1=R.drawable.manav; break;
-                                    case "Ponjikkara": t1=R.drawable.ponji; break;
+                                    case "Ponjikkara FC": t1=R.drawable.ponji; break;
                                     case "FC Marakkar":t1=R.drawable.mara; break;
                                     case "Chekuthans FC":t1=R.drawable.che;break;
                                     case "Dashamoolam FC":t1=R.drawable.dasha;break;
@@ -381,11 +387,11 @@ public class MainActivity extends AppCompatActivity {
                                     case "Club De Dinkan":t2=R.drawable.dink; break;
                                     case "Bellaries FC" : t2=R.drawable.bell; break;
                                     case "Real Manavalan FC":t2=R.drawable.manav; break;
-                                    case "Ponjikkara": t2=R.drawable.ponji; break;
+                                    case "Ponjikkara FC": t2=R.drawable.ponji; break;
                                     case "FC Marakkar":t2=R.drawable.mara; break;
-                                    case "Chekuthans FC":t1=R.drawable.che;break;
-                                    case "Dashamoolam FC":t1=R.drawable.dasha;break;
-                                    case "Karakkambi FC":t1=R.drawable.kara;break;
+                                    case "Chekuthans FC":t2=R.drawable.che;break;
+                                    case "Dashamoolam FC":t2=R.drawable.dasha;break;
+                                    case "Karakkambi FC":t2=R.drawable.kara;break;
                                 }
 
                                 TextView lv = findViewById(R.id.vshome3);
@@ -416,18 +422,15 @@ public class MainActivity extends AppCompatActivity {
 
                         if(queryDocumentSnapshots!=null&&queryDocumentSnapshots.exists()){
                             {
+                                Match match = queryDocumentSnapshots.toObject(Match.class);
                                 TextView team1goal = findViewById(R.id.team1goalhome1);
                                 TextView team2goal = findViewById(R.id.team2goalhome1);
                                 TextView datetime = findViewById(R.id.datetimehome1);
-                                TextView team1stat = findViewById(R.id.team1stathome1);
-                                TextView team2stat = findViewById(R.id.team2stathome1);
                                 ImageView team1logo = findViewById(R.id.team1logohome1);
                                 ImageView team2logo = findViewById(R.id.team2logohome1);
                                 team1goal.setText(String.valueOf(queryDocumentSnapshots.getDouble("team1goal").intValue()));
                                 team2goal.setText(String.valueOf(queryDocumentSnapshots.getDouble("team2goal").intValue()));
-                                datetime.setText(queryDocumentSnapshots.getString("datetime"));
-                                team1stat.setText(queryDocumentSnapshots.getString("team1stat"));
-                                team2stat.setText(queryDocumentSnapshots.getString("team2stat"));
+                                datetime.setText(mydateformat.format(match.getDatetime()));
                                 if(queryDocumentSnapshots.getBoolean("live")){
                                     live.setVisibility(View.VISIBLE);
                                     vs.setText("-");
@@ -442,7 +445,7 @@ public class MainActivity extends AppCompatActivity {
                                     case "Club De Dinkan":t1=R.drawable.dink; break;
                                     case "Bellaries FC" : t1=R.drawable.bell; break;
                                     case "Real Manavalan FC":t1=R.drawable.manav; break;
-                                    case "Ponjikkara": t1=R.drawable.ponji; break;
+                                    case "Ponjikkara FC": t1=R.drawable.ponji; break;
                                     case "FC Marakkar":t1=R.drawable.mara; break;
                                     case "Chekuthans FC":t1=R.drawable.che;break;
                                     case "Dashamoolam FC":t1=R.drawable.dasha;break;
@@ -452,11 +455,11 @@ public class MainActivity extends AppCompatActivity {
                                     case "Club De Dinkan":t2=R.drawable.dink; break;
                                     case "Bellaries FC" : t2=R.drawable.bell; break;
                                     case "Real Manavalan FC":t2=R.drawable.manav; break;
-                                    case "Ponjikkara": t2=R.drawable.ponji; break;
+                                    case "Ponjikkara FC": t2=R.drawable.ponji; break;
                                     case "FC Marakkar":t2=R.drawable.mara; break;
-                                    case "Chekuthans FC":t1=R.drawable.che;break;
-                                    case "Dashamoolam FC":t1=R.drawable.dasha;break;
-                                    case "Karakkambi FC":t1=R.drawable.kara;break;
+                                    case "Chekuthans FC":t2=R.drawable.che;break;
+                                    case "Dashamoolam FC":t2=R.drawable.dasha;break;
+                                    case "Karakkambi FC":t2=R.drawable.kara;break;
                                 }
 
 
@@ -484,7 +487,7 @@ public class MainActivity extends AppCompatActivity {
                             Log.e("Firebase","getid failed");
                             return;
                         }
-                        for (QueryDocumentSnapshot documentSnapshot :queryDocumentSnapshots){
+                        for (final QueryDocumentSnapshot documentSnapshot :queryDocumentSnapshots){
                             boolean live = (boolean)documentSnapshot.get("live");
                             if(live){
                                 docid =  documentSnapshot.getId();
@@ -494,6 +497,8 @@ public class MainActivity extends AppCompatActivity {
                                     public void onClick(View v) {
                                         Intent intent = new Intent(MainActivity.this,MatchDetails.class);
                                         intent.putExtra("snapshot",docid);
+                                        intent.putExtra("team1",documentSnapshot.get("team1").toString());
+                                        intent.putExtra("team2",documentSnapshot.get("team2").toString());
                                         startActivity(intent);
                                     }
                                 });
@@ -505,5 +510,38 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    List<String> ids = new ArrayList<>();
+    SimpleDateFormat mydateformat = new SimpleDateFormat("d MMM yyyy",java.util.Locale.getDefault());
+
+    private void getNextDocId(){
+        db.collection("Matches")
+                .orderBy("datetime")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                        if(e!=null){
+                            Log.e("Firebase","getid failed");
+                            return;
+                        }
+                        for (final QueryDocumentSnapshot documentSnapshot :queryDocumentSnapshots){
+                            boolean live = (boolean)documentSnapshot.get("live");
+                            boolean over = (boolean)documentSnapshot.get("over");
+                            if(!live&&!over){
+                                ids.add(documentSnapshot.getId());
+                            }
+                        }
+                        Log.e("Fire",String.valueOf(ids.size()));
+                        if(ids.size()==1){
+                            getNextMatch1Data();
+                        }else if(ids.size()>=2){
+                            getNextMatch1Data();
+                            getNextMatch2Data();
+                        }
+                    }
+                });
+    }
+
+
 
 }

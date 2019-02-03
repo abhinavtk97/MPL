@@ -1,5 +1,6 @@
 package in.ac.mace.abhinavtk.mpl;
 
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -31,7 +32,7 @@ public class PointAdapter extends FirestoreRecyclerAdapter<Point,PointAdapter.Ma
             case "Club De Dinkan":t1=R.drawable.dink; break;
             case "Bellaries FC" : t1=R.drawable.bell; break;
             case "Real Manavalan FC":t1=R.drawable.manav; break;
-            case "Ponjikkara": t1=R.drawable.ponji; break;
+            case "Ponjikkara FC": t1=R.drawable.ponji; break;
             case "FC Marakkar":t1=R.drawable.mara; break;
             case "Chekuthans FC":t1=R.drawable.che;break;
             case "Dashamoolam FC":t1=R.drawable.dasha;break;
@@ -45,6 +46,11 @@ public class PointAdapter extends FirestoreRecyclerAdapter<Point,PointAdapter.Ma
         holder.plus.setText(String.valueOf(model.getPlus()));
         holder.GD.setText(String.valueOf(model.getGD()));
         holder.P.setText(String.valueOf(model.getP()));
+
+        if(position%2==1)
+            holder.itemView.setBackgroundColor(Color.parseColor("#bdbdbd"));
+        else
+            holder.itemView.setBackgroundColor(Color.parseColor("#ffffff"));
 
     }
 

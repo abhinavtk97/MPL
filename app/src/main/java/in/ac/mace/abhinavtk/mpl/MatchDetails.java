@@ -22,6 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -51,6 +52,8 @@ public class MatchDetails extends AppCompatActivity {
         setContentView(R.layout.activity_match_details);
         Bundle extras = getIntent().getExtras();
         docid = extras.getString("snapshot");
+        final String t1 = extras.getString("team1");
+        final String t2 = extras.getString("team2");
         team1goal = findViewById(R.id.team1goaldetails);
         team2goal = findViewById(R.id.team2goaldetails);
         datetime = findViewById(R.id.datetimedetails);
@@ -84,7 +87,7 @@ public class MatchDetails extends AppCompatActivity {
     }
 
     private void setUpRecyclerView(){
-        Query query =matchreference.limit(100);
+        Query query =matchreference.orderBy("timestamp",Query.Direction.DESCENDING);
         FirestoreRecyclerOptions<MatchData> options = new FirestoreRecyclerOptions.Builder<MatchData>()
                 .setQuery(query,MatchData.class)
                 .build();
@@ -95,7 +98,7 @@ public class MatchDetails extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         Log.d("firebase","setting up");
     }
-
+    final SimpleDateFormat mydateformat = new SimpleDateFormat("d MMM yyyy HH:mm",java.util.Locale.getDefault());
     private void getMatchData(){
         db.collection("Matches").document(docid)
                 .addSnapshotListener(new EventListener<DocumentSnapshot>() {
@@ -109,9 +112,10 @@ public class MatchDetails extends AppCompatActivity {
                         Log.d("Firebase","Listenong");
                         if(queryDocumentSnapshots!=null&&queryDocumentSnapshots.exists()){
                             {
+                                Match match = queryDocumentSnapshots.toObject(Match.class);
                                 team1goal.setText(String.valueOf(queryDocumentSnapshots.getDouble("team1goal").intValue()));
                                 team2goal.setText(String.valueOf(queryDocumentSnapshots.getDouble("team2goal").intValue()));
-                                datetime.setText(queryDocumentSnapshots.getString("datetime"));
+                                datetime.setText(mydateformat.format(match.getDatetime()));
                                 team1stat.setText(queryDocumentSnapshots.getString("team1stat"));
                                 team2stat.setText(queryDocumentSnapshots.getString("team2stat"));
                                 if(queryDocumentSnapshots.getBoolean("live")){
@@ -125,7 +129,7 @@ public class MatchDetails extends AppCompatActivity {
                                     case "Club De Dinkan":t1=R.drawable.dink; break;
                                     case "Bellaries FC" : t1=R.drawable.bell; break;
                                     case "Real Manavalan FC":t1=R.drawable.manav; break;
-                                    case "Ponjikkara": t1=R.drawable.ponji; break;
+                                    case "Ponjikkara FC": t1=R.drawable.ponji; break;
                                     case "FC Marakkar":t1=R.drawable.mara; break;
                                     case "Chekuthans FC":t1=R.drawable.che;break;
                                     case "Dashamoolam FC":t1=R.drawable.dasha;break;
@@ -135,11 +139,11 @@ public class MatchDetails extends AppCompatActivity {
                                     case "Club De Dinkan":t2=R.drawable.dink; break;
                                     case "Bellaries FC" : t2=R.drawable.bell; break;
                                     case "Real Manavalan FC":t2=R.drawable.manav; break;
-                                    case "Ponjikkara": t2=R.drawable.ponji; break;
+                                    case "Ponjikkara FC": t2=R.drawable.ponji; break;
                                     case "FC Marakkar":t2=R.drawable.mara; break;
-                                    case "Chekuthans FC":t1=R.drawable.che;break;
-                                    case "Dashamoolam FC":t1=R.drawable.dasha;break;
-                                    case "Karakkambi FC":t1=R.drawable.kara;break;
+                                    case "Chekuthans FC":t2=R.drawable.che;break;
+                                    case "Dashamoolam FC":t2=R.drawable.dasha;break;
+                                    case "Karakkambi FC":t2=R.drawable.kara;break;
                                 }
 
                                 team1logo.setImageResource(t1);
