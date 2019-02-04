@@ -1,2 +1,2 @@
-# MPL
-Mace Premiere League Live Scores and Fixtures
+# MSL
+Mace Super League Live Scores and Fixtures
