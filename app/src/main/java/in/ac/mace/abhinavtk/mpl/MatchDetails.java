@@ -157,9 +157,12 @@ public class MatchDetails extends AppCompatActivity implements AdapterView.OnIte
                                         dataOutputStream.writeBytes(json);
                                         dataOutputStream.close();
                                         DataInputStream dataInputStream = new DataInputStream(connection.getInputStream());
-                                        for(int c= dataInputStream.read();c!=-1;c=dataInputStream.read()){
-                                            Log.e("Result",String.valueOf(c));
+                                        StringBuffer ss = new StringBuffer();
+                                        String temp;
+                                        while((temp = dataInputStream.readLine())!=null){
+                                            ss.append(temp);
                                         }
+                                        Log.e("ress",ss.toString());
                                         dataInputStream.close();
                                         Log.e("Result","Code"+connection.getResponseCode());
                                         Log.e("Result","Msg"+connection.getResponseMessage());
