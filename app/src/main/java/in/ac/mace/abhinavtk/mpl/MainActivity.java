@@ -99,12 +99,12 @@ public class MainActivity extends AppCompatActivity {
         insta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_VIEW,Uri.parse("http://instagram.com/_u/takshak18"));
+                Intent i = new Intent(Intent.ACTION_VIEW,Uri.parse("http://instagram.com/_u/mace_footballteam"));
                 i.setPackage("com.instagram.android");
                 try{
                     startActivity(i);
                 }catch (ActivityNotFoundException e){
-                    startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://instagram.com/takshak18")));
+                    startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://instagram.com/mace_footballteam")));
                 }
             }
         });

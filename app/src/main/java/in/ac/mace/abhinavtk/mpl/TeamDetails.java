@@ -24,9 +24,7 @@ public class TeamDetails extends AppCompatActivity {
     String id=null;
 
     List<String> players= new ArrayList<>();
-    List<String> allroles=new ArrayList<>();
     List<TextView> roles = new ArrayList<>();
-    List<TextView> names = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +67,6 @@ public class TeamDetails extends AppCompatActivity {
         TextView role6 = findViewById(R.id.role6);
         TextView role7 = findViewById(R.id.role7);
 
-
         roles.add(role1);
         roles.add(role2);
         roles.add(role3);
@@ -77,25 +74,6 @@ public class TeamDetails extends AppCompatActivity {
         roles.add(role5);
         roles.add(role6);
         roles.add(role7);
-
-
-        TextView name1 = findViewById(R.id.name1);
-        TextView name2 = findViewById(R.id.name2);
-        TextView name3 = findViewById(R.id.name3);
-        TextView name4 = findViewById(R.id.name4);
-        TextView name5 = findViewById(R.id.name5);
-        TextView name6 = findViewById(R.id.name6);
-        TextView name7 = findViewById(R.id.name7);
-
-
-        names.add(name1);
-        names.add(name2);
-        names.add(name3);
-        names.add(name4);
-        names.add(name5);
-        names.add(name6);
-        names.add(name7);
-
 
         getPlayers();
 
@@ -114,22 +92,10 @@ public class TeamDetails extends AppCompatActivity {
                         List<DocumentSnapshot> docs =  queryDocumentSnapshots.getDocuments();
                         for(int i=0;i<docs.size();i++){
                             players.add(docs.get(i).get("name").toString());
-                            allroles.add(docs.get(i).get("role").toString());
-                            Log.e("doing",String.valueOf(docs.size()));
                         }
-                        if(players!=null && allroles!=null){
-                            for(int i=0;i<allroles.size();i++){
-                                roles.get(i).setText(allroles.get(i));
-                            }
-                            for (int i=0;i<players.size();i++){
-                                names.get(i).setText(players.get(i));
-                            }
-                        }else{
-                            for(int i=0;i<allroles.size();i++){
-                                roles.get(i).setText("");
-                            }
-                            for (int i=0;i<players.size();i++){
-                                names.get(i).setText("");
+                        if(players!=null){
+                            for(int i=0;i<players.size();i++){
+                                roles.get(i).setText(players.get(i));
                             }
                         }
                     }

@@ -27,7 +27,7 @@ public class PointsTable extends AppCompatActivity {
     }
 
     private void setUpRecyclerView(){
-        Query query =matchreference.orderBy("P", Query.Direction.DESCENDING);
+        Query query =matchreference.orderBy("P",Query.Direction.DESCENDING);
         FirestoreRecyclerOptions<Point> options = new FirestoreRecyclerOptions.Builder<Point>()
                 .setQuery(query,Point.class)
                 .build();

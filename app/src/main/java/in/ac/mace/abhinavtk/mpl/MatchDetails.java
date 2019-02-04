@@ -72,6 +72,8 @@ public class MatchDetails extends AppCompatActivity implements AdapterView.OnIte
 
     int size=0;
 
+    String json= "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,8 +110,8 @@ public class MatchDetails extends AppCompatActivity implements AdapterView.OnIte
         List<String> categories = new ArrayList<>();
         categories.add("Commentery");
         categories.add("Goal");
-        categories.add("Yellow");
-        categories.add("Red");
+        categories.add("Yellow Card");
+        categories.add("Red Card");
         itemdata="Commentery";
         teamss = new ArrayList<>();
         teamss.add(t1);
@@ -134,6 +136,9 @@ public class MatchDetails extends AppCompatActivity implements AdapterView.OnIte
                 tosend.put("message",String.valueOf(desc.getText()));
                 tosend.put("team",teamname);
                 tosend.put("timestamp",Timestamp.now());
+                json = "{ \"to\": \"/topics/recieve\"," +
+                        "\"data\": {" +
+                        "\"head\":\""+itemdata+" ~ "+message+"\",\"message\":\""+String.valueOf(desc.getText())+"\",}}";
                 new AlertDialog.Builder(MatchDetails.this).setTitle("Confirm")
                         .setMessage("Are you sure to send this message")
                         .setIcon(android.R.drawable.ic_dialog_alert)
@@ -142,39 +147,6 @@ public class MatchDetails extends AppCompatActivity implements AdapterView.OnIte
                             public void onClick(DialogInterface dialog, int which) {
                                 db.collection("Matches").document(docid).collection("matchdata").add(tosend);
                                 if(itemdata.equals("Goal")){
-                                    try {
-                                        URL url = new URL("https://fcm.googleapis.com/fcm/send");
-                                        String json = "{ \"to\": \"/topics/recieve\"," +
-                                                "\"data\": {" +
-                                                "\"message\":\"Goal\",}}";
-                                        HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
-                                        connection.setRequestMethod("POST");
-                                        connection.setDoOutput(true);
-                                        connection.setDoInput(true);
-                                        connection.setRequestProperty("Content-Type","application/json");
-                                        connection.setRequestProperty("Authorization","key=AAAAgobSHTc:APA91bHtHMCKB5rDWh7wFf6At0dKaxkjW9AzkP4piIimpjIh63sZMH4j9OPB__UIc2b7Ez86pbXHhx87FsIed7bcXOhnRyauzaYMknR-iCpustL5N6Nnwl-SaFq83qjSB6zn6zZHrhRP");
-                                        DataOutputStream dataOutputStream = new DataOutputStream(connection.getOutputStream());
-                                        dataOutputStream.writeBytes(json);
-                                        dataOutputStream.close();
-                                        DataInputStream dataInputStream = new DataInputStream(connection.getInputStream());
-                                        StringBuffer ss = new StringBuffer();
-                                        String temp;
-                                        while((temp = dataInputStream.readLine())!=null){
-                                            ss.append(temp);
-                                        }
-                                        Log.e("ress",ss.toString());
-                                        dataInputStream.close();
-                                        Log.e("Result","Code"+connection.getResponseCode());
-                                        Log.e("Result","Msg"+connection.getResponseMessage());
-                                        Log.e("json",json);
-                                    } catch (MalformedURLException e) {
-                                        Log.e("POST",e.toString());
-                                    } catch (ProtocolException e) {
-                                        Log.e("POST",e.toString());
-                                    } catch (IOException e) {
-                                        Log.e("POST",e.toString());
-                                    }
-
                                     if(t2.equals(teamname)){
                                         db.collection("Matches").document(docid).update("team2goal",(Integer.parseInt(team2goal.getText().toString())+1));
                                         db.collection("Matches").document(docid).update("team2stat",team2stat.getText().toString()+"\n"+message);
@@ -184,6 +156,38 @@ public class MatchDetails extends AppCompatActivity implements AdapterView.OnIte
 
                                     }
                                 }
+
+                                try {
+                                    URL url = new URL("https://fcm.googleapis.com/fcm/send");
+                                    HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+                                    connection.setRequestMethod("POST");
+                                    connection.setDoOutput(true);
+                                    connection.setDoInput(true);
+                                    connection.setRequestProperty("Content-Type","application/json");
+                                    connection.setRequestProperty("Authorization","key=AAAAgobSHTc:APA91bHtHMCKB5rDWh7wFf6At0dKaxkjW9AzkP4piIimpjIh63sZMH4j9OPB__UIc2b7Ez86pbXHhx87FsIed7bcXOhnRyauzaYMknR-iCpustL5N6Nnwl-SaFq83qjSB6zn6zZHrhRP");
+                                    DataOutputStream dataOutputStream = new DataOutputStream(connection.getOutputStream());
+                                    dataOutputStream.writeBytes(json);
+                                    dataOutputStream.close();
+                                    DataInputStream dataInputStream = new DataInputStream(connection.getInputStream());
+                                    StringBuffer ss = new StringBuffer();
+                                    String temp;
+                                    while((temp = dataInputStream.readLine())!=null){
+                                        ss.append(temp);
+                                    }
+                                    Log.e("ress",ss.toString());
+                                    dataInputStream.close();
+                                    Log.e("Result","Code"+connection.getResponseCode());
+                                    Log.e("Result","Msg"+connection.getResponseMessage());
+                                    Log.e("json",json);
+                                } catch (MalformedURLException e) {
+                                    Log.e("POST",e.toString());
+                                } catch (ProtocolException e) {
+                                    Log.e("POST",e.toString());
+                                } catch (IOException e) {
+                                    Log.e("POST",e.toString());
+                                }
+
+
                             }
                         }).setNegativeButton(android.R.string.no,null).show();
 

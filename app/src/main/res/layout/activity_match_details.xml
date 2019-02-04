@@ -203,7 +203,7 @@
                 android:layout_weight="1"
                 android:id="@+id/addmatch"
                 android:layout_height="wrap_content"
-                android:hint="Heading"/>
+                android:hint="Player Name/Heading"/>
             <Button
                 android:layout_width="wrap_content"
                 android:id="@+id/sendbutton"
@@ -216,7 +216,7 @@
             android:layout_weight="1"
             android:id="@+id/adddescmatch"
             android:layout_height="wrap_content"
-            android:hint="Description"/>
+            android:hint="Thall"/>
     </LinearLayout>
 
 
