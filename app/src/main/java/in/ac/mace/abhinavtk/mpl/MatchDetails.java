@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -130,10 +131,15 @@ public class MatchDetails extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View v) {
                 final String message = String.valueOf(editText.getText());
+                String des = desc.getText().toString();
+                if(message.equals("")||des.equals("")){
+                    Toast.makeText(MatchDetails.this,"Enthelum type cheythit send cheyy",Toast.LENGTH_LONG);
+                    return;
+                }
                 final Map<String,Object> tosend = new HashMap<>();
                 tosend.put("description",message);
                 tosend.put("heading",itemdata);
-                tosend.put("message",String.valueOf(desc.getText()));
+                tosend.put("message",des);
                 tosend.put("team",teamname);
                 tosend.put("timestamp",Timestamp.now());
                 json = "{ \"to\": \"/topics/recieve\"," +
@@ -187,6 +193,9 @@ public class MatchDetails extends AppCompatActivity implements AdapterView.OnIte
                                     Log.e("POST",e.toString());
                                 }
 
+
+                                editText.setText("");
+                                desc.setText("");
 
                             }
                         }).setNegativeButton(android.R.string.no,null).show();
