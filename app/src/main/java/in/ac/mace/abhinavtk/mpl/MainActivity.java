@@ -3,6 +3,8 @@ package in.ac.mace.abhinavtk.mpl;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.ActivityOptions;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -11,6 +13,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.StyleRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewCompat;
@@ -30,6 +33,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -37,6 +42,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.ramotion.cardslider.CardSliderLayoutManager;
 import com.ramotion.cardslider.CardSnapHelper;
 import in.ac.mace.abhinavtk.mpl.cards.SliderAdapter;
@@ -118,6 +124,32 @@ public class MainActivity extends AppCompatActivity {
         TextView appname = findViewById(R.id.appname);
         appname.setTypeface(Typeface.createFromAsset(getAssets(),"open-sans-extrabold.ttf"));
 
+        FirebaseMessaging.getInstance().subscribeToTopic("recieve")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        String msg = "Subscribed to Notifications";
+                        if(!task.isSuccessful()){
+                            msg = "Could not subscribe to notifiations";
+                        }
+                        Log.d("FCM",msg);
+                        Toast.makeText(MainActivity.this,msg,Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+        createNotifChannel();
+
+    }
+    private void createNotifChannel(){
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
+            CharSequence name = "Live Scores";
+            String desc = "Live Scores of MSL@MACE";
+            int importanceDefault = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("MSLNOTI",name,importanceDefault);
+            channel.setDescription(desc);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
     private void initRecyclerView() {
