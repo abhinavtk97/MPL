@@ -3,6 +3,7 @@ package in.ac.mace.abhinavtk.mpl;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -31,6 +32,13 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,6 +46,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Nullable;
+import javax.net.ssl.HttpsURLConnection;
 
 import in.ac.mace.abhinavtk.mpl.pojo.Match;
 import in.ac.mace.abhinavtk.mpl.pojo.MatchData;
@@ -66,6 +75,9 @@ public class MatchDetails extends AppCompatActivity implements AdapterView.OnIte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         setContentView(R.layout.activity_match_details);
         Bundle extras = getIntent().getExtras();
         docid = extras.getString("snapshot");
@@ -130,6 +142,36 @@ public class MatchDetails extends AppCompatActivity implements AdapterView.OnIte
                             public void onClick(DialogInterface dialog, int which) {
                                 db.collection("Matches").document(docid).collection("matchdata").add(tosend);
                                 if(itemdata.equals("Goal")){
+                                    try {
+                                        URL url = new URL("https://fcm.googleapis.com/fcm/send");
+                                        String json = "{ \"to\": \"/topics/recieve\"," +
+                                                "\"data\": {" +
+                                                "\"message\":\"Goal\",}}";
+                                        HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+                                        connection.setRequestMethod("POST");
+                                        connection.setDoOutput(true);
+                                        connection.setDoInput(true);
+                                        connection.setRequestProperty("Content-Type","application/json");
+                                        connection.setRequestProperty("Authorization","key=AAAAgobSHTc:APA91bHtHMCKB5rDWh7wFf6At0dKaxkjW9AzkP4piIimpjIh63sZMH4j9OPB__UIc2b7Ez86pbXHhx87FsIed7bcXOhnRyauzaYMknR-iCpustL5N6Nnwl-SaFq83qjSB6zn6zZHrhRP");
+                                        DataOutputStream dataOutputStream = new DataOutputStream(connection.getOutputStream());
+                                        dataOutputStream.writeBytes(json);
+                                        dataOutputStream.close();
+                                        DataInputStream dataInputStream = new DataInputStream(connection.getInputStream());
+                                        for(int c= dataInputStream.read();c!=-1;c=dataInputStream.read()){
+                                            Log.e("Result",String.valueOf(c));
+                                        }
+                                        dataInputStream.close();
+                                        Log.e("Result","Code"+connection.getResponseCode());
+                                        Log.e("Result","Msg"+connection.getResponseMessage());
+                                        Log.e("json",json);
+                                    } catch (MalformedURLException e) {
+                                        Log.e("POST",e.toString());
+                                    } catch (ProtocolException e) {
+                                        Log.e("POST",e.toString());
+                                    } catch (IOException e) {
+                                        Log.e("POST",e.toString());
+                                    }
+
                                     if(t2.equals(teamname)){
                                         db.collection("Matches").document(docid).update("team2goal",(Integer.parseInt(team2goal.getText().toString())+1));
                                         db.collection("Matches").document(docid).update("team2stat",team2stat.getText().toString()+"\n"+message);
