@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
@@ -33,6 +34,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -59,21 +61,7 @@ import javax.annotation.Nullable;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final int[] pics = {R.drawable.image8, R.drawable.image3, R.drawable.image4, R.drawable.image6};
-    private final String[] countries = {"MATCH HISTORY", "STATISTICS", "TEAMS", "FIXTURE"};
-
-    private final SliderAdapter sliderAdapter = new SliderAdapter(pics, 4, new OnCardClickListener());
-
-    private CardSliderLayoutManager layoutManger;
-    private RecyclerView recyclerView;
-    private TextView country1TextView;
-    private TextView country2TextView;
-    private int countryOffset1;
-    private int countryOffset2;
-    private long countryAnimDuration;
-    private int currentPosition;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference matchreference;
     private String docid=null;
     private ProgressBar live ;
     private TextView vs ;
@@ -85,10 +73,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         live = findViewById(R.id.livehome1);
         vs= findViewById(R.id.vshome1);
-        initRecyclerView();
-        initCountryText();
-        getDocId();
-        getNextDocId();
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,39 +92,111 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ImageView insta = findViewById(R.id.instagram);
-        insta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("http://instagram.com/_u/mace_footballteam"));
-                i.setPackage("com.instagram.android");
-                try{
-                    startActivity(i);
-                }catch (ActivityNotFoundException e){
-                    startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://instagram.com/mace_footballteam")));
-                }
-            }
-        });
+        ImageView im1 = findViewById(R.id.im1);
+        Glide.with(MainActivity.this)
+                .load(R.drawable.image8)
+                .into(im1);
 
-        TextView appname = findViewById(R.id.appname);
-        appname.setTypeface(Typeface.createFromAsset(getAssets(),"open-sans-extrabold.ttf"));
+        ImageView im2 = findViewById(R.id.im2);
+        Glide.with(MainActivity.this)
+                .load(R.drawable.image3)
+                .into(im2);
+        ImageView im3 = findViewById(R.id.im3);
+        Glide.with(MainActivity.this)
+                .load(R.drawable.image4)
+                .into(im3);
+        ImageView im4 = findViewById(R.id.im4);
+        Glide.with(MainActivity.this)
+                .load(R.drawable.image6)
+                .into(im4);
 
-        FirebaseMessaging.getInstance().subscribeToTopic("recieve")
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        String msg = "Subscribed to Notifications";
-                        if(!task.isSuccessful()){
-                            msg = "Could not subscribe to notifiations";
-                        }
-                        Log.d("FCM",msg);
-                        Toast.makeText(MainActivity.this,msg,Toast.LENGTH_SHORT).show();
-
-                    }
-                });
-        createNotifChannel();
+        new LongOp().execute();
 
     }
+
+    private class LongOp extends AsyncTask<String,Void,String>{
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+
+            TextView t1 = findViewById(R.id.t1);
+            t1.setTypeface(Typeface.createFromAsset(getAssets(),"open-sans-extrabold.ttf"));
+            TextView t2 = findViewById(R.id.t2);
+            t2.setTypeface(Typeface.createFromAsset(getAssets(),"open-sans-extrabold.ttf"));
+            TextView t3 = findViewById(R.id.t3);
+            t3.setTypeface(Typeface.createFromAsset(getAssets(),"open-sans-extrabold.ttf"));
+            TextView t4 = findViewById(R.id.t4);
+            t4.setTypeface(Typeface.createFromAsset(getAssets(),"open-sans-extrabold.ttf"));
+            ImageView insta = findViewById(R.id.instagram);
+            insta.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("http://instagram.com/_u/mace_footballteam"));
+                    i.setPackage("com.instagram.android");
+                    try{
+                        startActivity(i);
+                    }catch (ActivityNotFoundException e){
+                        startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://instagram.com/mace_footballteam")));
+                    }
+                }
+            });
+
+            TextView appname = findViewById(R.id.appname);
+            appname.setTypeface(Typeface.createFromAsset(getAssets(),"open-sans-extrabold.ttf"));
+
+            CardView c1 = findViewById(R.id.card1);
+            c1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(MainActivity.this,MatchHistory.class));
+                }
+            });
+            CardView c2 = findViewById(R.id.card2);
+            c2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(MainActivity.this,Statistics.class));
+                }
+            });
+            CardView c3 = findViewById(R.id.card3);
+            c3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(MainActivity.this,Teams.class));
+                }
+            });
+            CardView c4 = findViewById(R.id.card4);
+            c4.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(MainActivity.this,Fixture.class));
+                }
+            });
+
+
+
+            //getDocId();
+            //getNextDocId();
+
+            FirebaseMessaging.getInstance().subscribeToTopic("recieve")
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            String msg = "Subscribed to Notifications";
+                            if(!task.isSuccessful()){
+                                msg = "Could not subscribe to notifiations";
+                            }
+                            Log.d("FCM",msg);
+                            //Toast.makeText(MainActivity.this,msg,Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+            createNotifChannel();
+            return null;
+        }
+    }
+
     private void createNotifChannel(){
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
             CharSequence name = "Live Scores";
@@ -149,192 +206,6 @@ public class MainActivity extends AppCompatActivity {
             channel.setDescription(desc);
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
-        }
-    }
-
-    private void initRecyclerView() {
-        recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setAdapter(sliderAdapter);
-        recyclerView.setHasFixedSize(true);
-
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    onActiveCardChange();
-                }
-            }
-        });
-
-        layoutManger = (CardSliderLayoutManager) recyclerView.getLayoutManager();
-
-        new CardSnapHelper().attachToRecyclerView(recyclerView);
-    }
-
-
-
-    private void initCountryText() {
-        countryAnimDuration = getResources().getInteger(R.integer.labels_animation_duration);
-        countryOffset1 = getResources().getDimensionPixelSize(R.dimen.left_offset);
-        countryOffset2 = getResources().getDimensionPixelSize(R.dimen.card_width);
-        country1TextView = (TextView) findViewById(R.id.tv_country_1);
-        country2TextView = (TextView) findViewById(R.id.tv_country_2);
-
-        country1TextView.setX(countryOffset1);
-        country2TextView.setX(countryOffset2);
-        country1TextView.setText(countries[0]);
-        country2TextView.setAlpha(0f);
-
-        country1TextView.setTypeface(Typeface.createFromAsset(getAssets(), "open-sans-extrabold.ttf"));
-        country2TextView.setTypeface(Typeface.createFromAsset(getAssets(), "open-sans-extrabold.ttf"));
-    }
-
-
-
-    private void setCountryText(String text, boolean left2right) {
-        final TextView invisibleText;
-        final TextView visibleText;
-        if (country1TextView.getAlpha() > country2TextView.getAlpha()) {
-            visibleText = country1TextView;
-            invisibleText = country2TextView;
-        } else {
-            visibleText = country2TextView;
-            invisibleText = country1TextView;
-        }
-
-        final int vOffset;
-        if (left2right) {
-            invisibleText.setX(0);
-            vOffset = countryOffset2;
-        } else {
-            invisibleText.setX(countryOffset2);
-            vOffset = 0;
-        }
-
-        invisibleText.setText(text);
-
-        final ObjectAnimator iAlpha = ObjectAnimator.ofFloat(invisibleText, "alpha", 1f);
-        final ObjectAnimator vAlpha = ObjectAnimator.ofFloat(visibleText, "alpha", 0f);
-        final ObjectAnimator iX = ObjectAnimator.ofFloat(invisibleText, "x", countryOffset1);
-        final ObjectAnimator vX = ObjectAnimator.ofFloat(visibleText, "x", vOffset);
-
-        final AnimatorSet animSet = new AnimatorSet();
-        animSet.playTogether(iAlpha, vAlpha, iX, vX);
-        animSet.setDuration(countryAnimDuration);
-        animSet.start();
-    }
-
-    private void onActiveCardChange() {
-        Log.d("tag","here");
-        final int pos = layoutManger.getActiveCardPosition();
-        if (pos == RecyclerView.NO_POSITION || pos == currentPosition) {
-            return;
-        }
-
-        onActiveCardChange(pos);
-
-    }
-
-    private void onActiveCardChange(int pos) {
-        int animH[] = new int[] {R.anim.slide_in_right, R.anim.slide_out_left};
-        int animV[] = new int[] {R.anim.slide_in_top, R.anim.slide_out_bottom};
-
-        final boolean left2right = pos < currentPosition;
-        currentPosition = pos;
-        if (left2right) {
-            animH[0] = R.anim.slide_in_left;
-            animH[1] = R.anim.slide_out_right;
-
-            animV[0] = R.anim.slide_in_bottom;
-            animV[1] = R.anim.slide_out_top;
-        }
-        Log.d("tag",pos+"");
-
-        setCountryText(countries[pos], left2right);
-
-
-    }
-
-
-
-    private class TextViewFactory implements  ViewSwitcher.ViewFactory {
-
-        @StyleRes final int styleId;
-        final boolean center;
-
-        TextViewFactory(@StyleRes int styleId, boolean center) {
-            this.styleId = styleId;
-            this.center = center;
-        }
-
-        @SuppressWarnings("deprecation")
-        @Override
-        public View makeView() {
-            final TextView textView = new TextView(MainActivity.this);
-
-            if (center) {
-                textView.setGravity(Gravity.CENTER);
-            }
-
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-                textView.setTextAppearance(MainActivity.this, styleId);
-            } else {
-                textView.setTextAppearance(styleId);
-            }
-
-            return textView;
-        }
-
-    }
-
-    private class ImageViewFactory implements ViewSwitcher.ViewFactory {
-        @Override
-        public View makeView() {
-            final ImageView imageView = new ImageView(MainActivity.this);
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
-            final LayoutParams lp = new ImageSwitcher.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-            imageView.setLayoutParams(lp);
-
-            return imageView;
-        }
-    }
-
-    private class OnCardClickListener implements View.OnClickListener {
-        @Override
-        public void onClick(View view) {
-            final CardSliderLayoutManager lm =  (CardSliderLayoutManager) recyclerView.getLayoutManager();
-
-            if (lm.isSmoothScrolling()) {
-                return;
-            }
-
-            final int activeCardPosition = lm.getActiveCardPosition();
-            if (activeCardPosition == RecyclerView.NO_POSITION) {
-                return;
-            }
-
-            final int clickedPosition = recyclerView.getChildAdapterPosition(view);
-            Intent intent = null;
-            if (clickedPosition == activeCardPosition) {
-                if(clickedPosition == 0) {
-                    intent = new Intent(MainActivity.this, MatchHistory.class);
-                    startActivity(intent);
-                }else if(clickedPosition == 1){
-                    intent = new Intent(MainActivity.this, Statistics.class);
-                    startActivity(intent);
-                }else if(clickedPosition == 2){
-                    intent = new Intent(MainActivity.this, Teams.class);
-                    startActivity(intent);
-                }else if(clickedPosition == 3){
-                    intent = new Intent(MainActivity.this, Fixture.class);
-                    startActivity(intent);
-                }
-
-            } else if (clickedPosition > activeCardPosition) {
-                recyclerView.smoothScrollToPosition(clickedPosition);
-                onActiveCardChange(clickedPosition);
-            }
         }
     }
 

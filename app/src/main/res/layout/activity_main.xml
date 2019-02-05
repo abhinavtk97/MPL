@@ -607,7 +607,7 @@
 
             <ImageView
                 android:id="@+id/instagram"
-                android:src="@drawable/insta"
+                android:src="@drawable/ic_people_outline_black_24dp"
                 android:padding="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -617,16 +617,143 @@
 
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
+<HorizontalScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="210dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginStart="@dimen/recycler_view_left_offset"
-        android:clipChildren="false"
-        android:overScrollMode="never"
-        app:layoutManager="com.ramotion.cardslider.CardSliderLayoutManager"
-        app:viewUpdater="in.ac.mace.abhinavtk.mpl.cards.CardsUpdater"/>
+        android:orientation="horizontal"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.CardView
+            android:layout_width="400dp"
+            android:layout_margin="10dp"
+            android:id="@+id/card1"
+            app:cardCornerRadius="10dp"
+            android:layout_height="200dp">
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/im1"
+                    android:layout_width="match_parent"
+                    app:layout_constraintCircleRadius="10dp"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:id="@+id/t1"
+                    android:textColor="#ffffff"
+                    android:shadowColor="#000000"
+                    android:text="MATCH HISTORY"
+                    app:layout_constraintCircleRadius="10dp"
+                    android:textSize="40sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:layout_width="400dp"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="10dp"
+            android:id="@+id/card2"
+            android:layout_height="200dp">
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:scaleType="centerCrop"
+                    android:id="@+id/im2"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/t2"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:textColor="#ffffff"
+                    android:shadowColor="#000000"
+                    android:text="STATISTICS"
+                    android:textSize="40sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    />
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:layout_width="400dp"
+            android:layout_margin="10dp"
+            android:id="@+id/card3"
+            app:cardCornerRadius="10dp"
+            android:layout_height="200dp">
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:scaleType="centerCrop"
+                    android:id="@+id/im3"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/t3"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:textColor="#ffffff"
+                    android:shadowColor="#000000"
+                    android:text="TEAMS"
+                    android:textSize="40sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    />
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:layout_width="400dp"
+            android:layout_margin="10dp"
+            android:id="@+id/card4"
+            app:cardCornerRadius="10dp"
+            android:layout_height="200dp">
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:scaleType="centerCrop"
+                    android:id="@+id/im4"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/t4"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:textColor="#ffffff"
+                    android:layout_marginEnd="8dp"
+                    android:shadowColor="#000000"
+                    android:text="FIXTURE"
+                    android:textSize="40sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    />
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+</HorizontalScrollView>
 
 
 </LinearLayout>
@@ -648,8 +775,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_margin="16dp"
-        android:layout_marginBottom="8dp"
         android:src="@drawable/ic_info_black_24dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
