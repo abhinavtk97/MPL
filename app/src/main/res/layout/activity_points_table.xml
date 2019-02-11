@@ -6,14 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PointsTable">
-    <TextView
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:textAppearance="@style/cardHeadTitle"
-        android:textColor="#000000"
-        android:gravity="center"
-        android:text="Points Table"/>
+        app:cardElevation="10dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textAppearance="@style/cardHeadTitle"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:text="Points Table"/>
+    </android.support.v7.widget.CardView>
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

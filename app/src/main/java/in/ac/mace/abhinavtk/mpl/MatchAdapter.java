@@ -93,7 +93,7 @@ public class MatchAdapter extends FirestoreRecyclerAdapter<Match,MatchAdapter.Ma
         TextView team1name;
         TextView team2name;
 
-        public MatchHolder(View itemView){
+        public MatchHolder(final View itemView){
             super(itemView);
             team1goal = itemView.findViewById(R.id.team1goal);
             team2goal = itemView.findViewById(R.id.team2goal);
@@ -112,6 +112,7 @@ public class MatchAdapter extends FirestoreRecyclerAdapter<Match,MatchAdapter.Ma
                     int position = getAdapterPosition();
                     if(position!=RecyclerView.NO_POSITION && listener!=null){
                         listener.onItemClick(getSnapshots().getSnapshot(position),position);
+
                     }
                 }
             });

@@ -75,18 +75,27 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textAppearance="@style/cardItemComment"
-                                android:layout_marginBottom="8dp"
                                 android:textColor="#000000"
                                 android:text="" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/linearLayout2home1">
 
                             <TextView
                                 android:id="@+id/team1stathome1"
                                 android:layout_width="wrap_content"
+                                android:layout_marginBottom="4dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
                                 android:text="" />
                         </LinearLayout>
-
                         <LinearLayout
                             android:id="@+id/linearLayouthome1"
                             android:layout_width="wrap_content"
@@ -113,18 +122,28 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textAppearance="@style/cardItemComment"
-                                android:layout_marginBottom="8dp"
+
                                 android:textColor="#000000"
                                 android:text="" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/linearLayouthome1">
 
                             <TextView
                                 android:id="@+id/team2stathome1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginBottom="4dp"
                                 android:layout_marginEnd="16dp"
                                 android:text="" />
                         </LinearLayout>
-
                         <TextView
                             android:id="@+id/datetimehome1"
                             android:layout_width="wrap_content"
@@ -164,20 +183,11 @@
                                 android:id="@+id/vshome1"
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
-                                android:layout_alignTop="@id/team1data"
-                                android:layout_alignParentEnd="true"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginBottom="8dp"
                                 android:gravity="center"
                                 android:text="No Live"
                                 android:textAppearance="@style/cardHeadTitle"
                                 android:textColor="#000000"
-                                android:textSize="20dp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.552" />
+                                android:textSize="20dp" />
 
                             <TextView
                                 android:id="@+id/team1goalhome1"

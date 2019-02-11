@@ -6,16 +6,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     >
-    <TextView
-        android:id="@+id/tvew"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="10dp"
-        android:layout_margin="10dp"
-        android:textAppearance="@style/cardHeadTitle"
-        android:textColor="#000000"
-        android:text="MATCH SUMMARY" />
+        app:cardElevation="10dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvew"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:textAppearance="@style/cardHeadTitle"
+            android:textColor="#000000"
+            android:text="MATCH SUMMARY" />
+    </android.support.v7.widget.CardView>
+
 
 <android.support.v7.widget.CardView
     android:layout_width="match_parent"
@@ -59,18 +65,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/cardItemComment"
-                android:layout_marginBottom="8dp"
                 android:textColor="#000000"
                 android:text="TextView" />
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2details">
 
             <TextView
                 android:id="@+id/team1statdetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:layout_marginStart="16dp"
                 android:text="TextView" />
         </LinearLayout>
-
         <LinearLayout
             android:id="@+id/linearLayoutdetails"
             android:layout_width="wrap_content"
@@ -97,18 +113,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/cardItemComment"
-                android:layout_marginBottom="8dp"
                 android:textColor="#000000"
                 android:text="TextView" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutdetails">
 
             <TextView
                 android:id="@+id/team2statdetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:layout_marginEnd="16dp"
                 android:text="TextView" />
         </LinearLayout>
-
         <TextView
             android:id="@+id/datetimedetails"
             android:layout_width="wrap_content"
