@@ -1,43 +1,27 @@
 package in.ac.mace.abhinavtk.mpl;
 
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
-import android.app.ActivityOptions;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
-import android.support.annotation.StyleRes;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.view.ViewTreeObserver;
-import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextSwitcher;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ViewSwitcher;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -45,19 +29,14 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.ramotion.cardslider.CardSliderLayoutManager;
-import com.ramotion.cardslider.CardSnapHelper;
-import in.ac.mace.abhinavtk.mpl.cards.SliderAdapter;
-import in.ac.mace.abhinavtk.mpl.pojo.Match;
-import in.ac.mace.abhinavtk.mpl.pojo.StatisticData;
-import in.ac.mace.abhinavtk.mpl.utils.DecodeBitmapTask;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import javax.annotation.Nullable;
+
+import in.ac.mace.abhinavtk.mpl.pojo.Match;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -105,10 +84,7 @@ public class MainActivity extends AppCompatActivity {
         Glide.with(MainActivity.this)
                 .load(R.drawable.image4)
                 .into(im3);
-        ImageView im4 = findViewById(R.id.im4);
-        Glide.with(MainActivity.this)
-                .load(R.drawable.image6)
-                .into(im4);
+
 
         new LongOp().execute();
 
@@ -126,8 +102,6 @@ public class MainActivity extends AppCompatActivity {
             t2.setTypeface(Typeface.createFromAsset(getAssets(),"open-sans-extrabold.ttf"));
             TextView t3 = findViewById(R.id.t3);
             t3.setTypeface(Typeface.createFromAsset(getAssets(),"open-sans-extrabold.ttf"));
-            TextView t4 = findViewById(R.id.t4);
-            t4.setTypeface(Typeface.createFromAsset(getAssets(),"open-sans-extrabold.ttf"));
             ImageView insta = findViewById(R.id.instagram);
             insta.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -166,18 +140,12 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(new Intent(MainActivity.this,Teams.class));
                 }
             });
-            CardView c4 = findViewById(R.id.card4);
-            c4.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(MainActivity.this,Fixture.class));
-                }
-            });
 
 
 
-            //getDocId();
-            //getNextDocId();
+
+            getDocId();
+            getNextDocId();
 
             FirebaseMessaging.getInstance().subscribeToTopic("recieve")
                     .addOnCompleteListener(new OnCompleteListener<Void>() {

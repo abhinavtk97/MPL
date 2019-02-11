@@ -8,14 +8,14 @@ public class Point {
     private String L;
     private String D;
     private String plus;
-    private String GD;
+    private int GD;
     private int P;
 
     public Point(){
         //empty
     }
 
-    public Point(String team, String m, String w, String l, String d, String plus, String GD, int p) {
+    public Point(String team, String m, String w, String l, String d, String plus, int GD, int p) {
         this.team = team;
         M = m;
         W = w;
@@ -70,11 +70,11 @@ public class Point {
         this.plus = plus;
     }
 
-    public String getGD() {
+    public int getGD() {
         return GD;
     }
 
-    public void setGD(String GD) {
+    public void setGD(int GD) {
         this.GD = GD;
     }
 

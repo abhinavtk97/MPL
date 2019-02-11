@@ -3,6 +3,7 @@ package in.ac.mace.abhinavtk.mpl;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,7 @@ public class PointAdapter extends FirestoreRecyclerAdapter<Point,PointAdapter.Ma
         holder.plus.setText(String.valueOf(model.getPlus()));
         holder.GD.setText(String.valueOf(model.getGD()));
         holder.P.setText(String.valueOf(model.getP()));
+        Log.d("datafromserver",model.getD());
 
         if(position%2==1)
             holder.itemView.setBackgroundColor(Color.parseColor("#bdbdbd"));

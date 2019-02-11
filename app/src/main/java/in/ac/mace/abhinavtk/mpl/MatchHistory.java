@@ -1,24 +1,18 @@
 package in.ac.mace.abhinavtk.mpl;
 
 import android.app.Activity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
-
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-
-
-import java.io.Serializable;
 
 import in.ac.mace.abhinavtk.mpl.pojo.Match;
 

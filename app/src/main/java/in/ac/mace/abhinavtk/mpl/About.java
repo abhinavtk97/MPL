@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import mehdi.sakout.aboutpage.AboutPage;
-import mehdi.sakout.aboutpage.Element;
 
 public class About extends AppCompatActivity {
 
